@@ -98,6 +98,10 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NotificationSystem\INotification.cs" />
+    <Compile Include="NotificationSystem\Notification.cs" />
+    <Compile Include="NotificationSystem\NotificationSystem.cs" />
+    <Compile Include="NotificationSystem\POINotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
