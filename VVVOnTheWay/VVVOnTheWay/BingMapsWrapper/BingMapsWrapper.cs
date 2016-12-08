@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
+using VVVOnTheWay.Route;
 
 
 namespace LocationSystem
@@ -33,6 +34,18 @@ namespace LocationSystem
         /// <returns> double as distance in meters between the two positions</returns>
         /// TODO: Return distance between points
        public static double getDistanceTo(Geoposition source, Geoposition target)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        /// <summary>
+        /// Method for checking if the user has lost the route.
+        /// </summary>
+        /// <param name="source">The location of the user as Geoposition <seealso cref="Geoposition"/></param>
+        /// <param name="route">The route the user is using <seealso cref="Route"/></param>
+        /// <returns>returns a boolean that is true if the user has lost the route</returns>
+        public static Boolean RouteLeaved(Geoposition source, Route route)
         {
             throw new NotImplementedException();
         }
