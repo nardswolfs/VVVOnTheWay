@@ -16,7 +16,7 @@ namespace VVVOnTheWay.NotificationSystem
         /// <summary>
         /// Creates a task to send a push notification
         /// </summary>
-        /// <param name="notification"> A notification implementing the INotification interface.</param>
+        /// <param name="notification"> A notification implementing the <see cref="INotification"/> interface.</param>
         /// <returns> A task to send a push notification. </returns>
         //TODO add a way to send the vibration notifiction
         public static Task SendPushNotificationAsync(INotification notification)
@@ -47,7 +47,7 @@ namespace VVVOnTheWay.NotificationSystem
         /// <summary>
         /// Creates a task to send a push notification
         /// </summary>
-        /// <param name="notification"> A notification implementing the INotification interface.</param>
+        /// <param name="notification"> A notification implementing the <see cref="INotification"/> interface.</param>
         /// <returns> A task to send a pop up notification. </returns>
         //TODO add a way to send the pop up notifiction
         public static Task SendPopUpNotificationAsync(INotification notification)
