@@ -11,6 +11,6 @@ namespace VVVOnTheWay.NotificationSystem
     /// </summary>
     interface INotification
     {
-        //TODO we have a title field in the class diagram but an interface can't contain a field
+        string Title { get; set; }
     }
 }

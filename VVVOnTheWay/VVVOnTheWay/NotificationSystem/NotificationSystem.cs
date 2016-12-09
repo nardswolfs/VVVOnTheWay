@@ -11,6 +11,8 @@ namespace VVVOnTheWay.NotificationSystem
     /// </summary>
     static class NotificationSystem
     {
+        
+
         /// <summary>
         /// Creates a task to send a push notification
         /// </summary>

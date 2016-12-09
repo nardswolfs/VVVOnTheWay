@@ -11,15 +11,11 @@ namespace VVVOnTheWay.NotificationSystem
     /// </summary>
     class Notification : INotification
     {
-        private string Text { get; set; }
-
         /// <summary>
-        /// Constructor for a notification object.
+        /// Title: The property containing the tile for this notification
+        /// Text: A property that contains thet text for notification, when applicable
         /// </summary>
-        ///TODO Add body if need be
-        public Notification()
-        {
-            
-        }
+        public string Title { get; set; }
+        public string Text { get; set; }
     }
 }
