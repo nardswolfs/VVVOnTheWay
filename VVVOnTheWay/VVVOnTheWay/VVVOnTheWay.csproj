@@ -117,6 +117,8 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\du-NL\Resources.resw" />
     <None Include="VVVOnTheWay_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
