@@ -123,7 +123,6 @@
     <None Include="VVVOnTheWay_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="Assets\England.png" />
     <Content Include="Assets\help.png" />
     <Content Include="Assets\Netherlands.png" />
