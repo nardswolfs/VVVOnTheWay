@@ -22,6 +22,7 @@
             <Button
                 Style="{StaticResource ChooseMenuStyle}"
                 Click="English_Click"
+                
                 >
                 <Image Source="Assets/England.png" Stretch="Fill"/>
             </Button>
