@@ -14,6 +14,6 @@ namespace VVVOnTheWay.NotificationSystem
         /// <summary>
         /// The title of the notification
         /// </summary>
-        string Title { get; set; }
+        string Title { get; }
     }
 }
