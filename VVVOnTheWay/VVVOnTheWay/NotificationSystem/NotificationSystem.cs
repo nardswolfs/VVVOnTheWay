@@ -8,6 +8,7 @@ using Windows.UI.Composition;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Microsoft.Toolkit.Uwp.Notifications;
+using Windows.Phone.Devices.Notification;
 
 namespace VVVOnTheWay.NotificationSystem
 {
@@ -58,10 +59,10 @@ namespace VVVOnTheWay.NotificationSystem
         /// Creates a task to send a sound notification.
         /// </summary>
         /// <returns> The task to send a vibration notification. </returns>
-        //TODO add a way to send the vibration notifiction. THis doesn't have to be a seperate notification. We could just call the VibrationDevice.Vibrate
+        //TODO add a way to send the vibration notifiction.
         public static async Task SendVibrationNotificationAsync()
         {
-            throw new NotImplementedException();
+            VibrationDevice.GetDefault().Vibrate(new TimeSpan(0, 0, 2));
         }
 
         /// <summary>
@@ -71,28 +72,16 @@ namespace VVVOnTheWay.NotificationSystem
         /// <returns> A task to send a pop up notification. </returns>
         public static async Task SendPopUpNotificationAsync(Notification notification)
         {
-            var dialog = new MessageDialog(notification.Title, notification.Text);
-            dialog.Commands.Add(new UICommand("Close", new UICommandInvokedHandler(CommandInvokedHandler)));
-            dialog.ShowAsync();
-        }
-
-        /// <summary>
-        /// A handler for all commands. See below for expansions to this text.
-        /// </summary>
-        /// <param name="c">the invoked command. For now must be something implementing teh IUICommand interface</param>
-        private static void CommandInvokedHandler(IUICommand c)
-        {
-            //TODO see if we need a switch for this handler and then implement functions based on the button name
+            new MessageDialog(notification.Text, notification.Title).ShowAsync();
         }
 
         /// <summary>
         /// Creates a toast notification displaying text
         /// </summary>
         /// <param name="n">the notification that should be displayed</param>
-        /// <returns> a toast notification based on the notification used in the parameter</returns>
+        /// <returns> a toast notification based on the notification provided</returns>
         private static ToastNotification CreateTextToastNotification(Notification n)
         {
-            #region Creating the toast details
             //TODO Under construction, don't know exactly what the launch does, but ill look into it
             ToastVisual visual = new ToastVisual()
             {
@@ -112,35 +101,16 @@ namespace VVVOnTheWay.NotificationSystem
                             }
                 }
             };
-
-            ToastActionsCustom actions = new ToastActionsCustom()
-            {
-                Buttons =
-                        {
-                            new ToastButton("Close", "close")
-                            {
-                                ActivationType = ToastActivationType.Background
-                            }
-                        }
-            };
-
-            ToastContent content = new ToastContent()
-            {
-                Visual = visual,
-                Actions = actions
-            };
-            #endregion
-
-            //Putting the toast in the toaster
-            var toast = new ToastNotification(content.GetXml());
-
-            //Done toasting the toast
-            return toast;
+            return FinishToastification(visual);            
         }
 
+        /// <summary>
+        /// Creates a toast notification displaying a POI
+        /// </summary>
+        /// <param name="n">a PoiNotification</param>
+        /// <returns>a toast notification based on the notification provided</returns>
         private static ToastNotification CreatePoiToastNotification(PoiNotification n)
         {
-            #region Creating the toast details
             //TODO add toast audio, also, see todo above for the launch
             ToastVisual visual = new ToastVisual()
             {
@@ -160,17 +130,42 @@ namespace VVVOnTheWay.NotificationSystem
 
                         new AdaptiveImage()
                         {
-                            Source = n.Image.UriSource.ToString()
+                            Source = n.ImagePath
                         }
                     }
                 }
             };
+            return FinishToastification(visual);
+        }
+
+        /// <summary>
+        /// Finishes every toast notification
+        /// </summary>
+        /// <param name="visual">the visuals of the toast notification that needs to be finished</param>
+        /// <returns>the finished toast notification</returns>
+        private static ToastNotification FinishToastification(ToastVisual visual)
+        {
+            ToastActionsCustom actions = new ToastActionsCustom()
+            {
+                Buttons =
+                    {
+                        new ToastButton("Pause", "pause")
+                        {
+                            ActivationType = ToastActivationType.Background
+                        },
+
+                        new ToastButton("Close", "close")
+                        {
+                            ActivationType = ToastActivationType.Background
+                        }
+                    }
+            };
 
             ToastContent content = new ToastContent()
             {
-                Visual = visual
+                Visual = visual,
+                Actions = actions
             };
-            #endregion
 
             //Putting the toast in the toaster
             var toast = new ToastNotification(content.GetXml());

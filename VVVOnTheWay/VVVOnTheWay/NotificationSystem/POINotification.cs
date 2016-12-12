@@ -22,14 +22,21 @@ namespace VVVOnTheWay.NotificationSystem
         /// </summary>
         public string Title { get; }
         public string AudioPath { get; }
-        public BitmapImage Image { get; }
+        public string ImagePath { get; }
         public string Description { get; }
 
+        /// <summary>
+        /// Creates a Poi notification
+        /// </summary>
+        /// <param name="title">The name of the notification</param>
+        /// <param name="audio">The path to the audio file that needs to be played</param>
+        /// <param name="imagePath">The path to the image file that needs to be shown</param>
+        /// <param name="description">The description of the POI</param>
         public PoiNotification(string title, string audio, string imagePath, string description)
         {
             Title = title;
             AudioPath = audio;
-            this.Image = new BitmapImage((new Uri(imagePath)));
+            ImagePath = imagePath;
             Description = description;
         }
     }

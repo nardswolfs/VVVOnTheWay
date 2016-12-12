@@ -19,6 +19,11 @@ namespace VVVOnTheWay.NotificationSystem
         public string Title { get; }
         public string Text { get; }
 
+        /// <summary>
+        /// Creates a notification
+        /// </summary>
+        /// <param name="title">The name of the notification</param>
+        /// <param name="text">The text of the notification</param>
         public Notification(string title, string text)
         {
             Title = title;
