@@ -42,7 +42,7 @@ namespace VVVOnTheWay.NotificationSystem
         //TODO add a way to send the vibration notifiction.
         public static async Task SendVibrationNotificationAsync()
         {
-            VibrationDevice.GetDefault().Vibrate(new TimeSpan(0, 0, 2));
+            VibrationDevice.GetDefault().Vibrate(TimeSpan.FromSeconds(2));
         }
 
         /// <summary>
