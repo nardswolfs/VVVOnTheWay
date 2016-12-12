@@ -31,9 +31,10 @@ namespace VVVOnTheWay
             BingMapsWrapper.notifyOnLocationUpdate(UpdateUserLocation);
         }
 
-        private void UpdateUserLocation(Geoposition geoposition)
+        private object UpdateUserLocation(Geoposition geoposition)
         {
             Map.Center = geoposition.Coordinate.Point;
+            return null;
         }
 
        
