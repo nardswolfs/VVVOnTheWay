@@ -25,7 +25,7 @@ namespace VVVOnTheWay.FileIO
         /// Loads/creates the Historical Kilometer Route, which can be retrieved as this class' attributes
         /// </summary>
         /// <returns>The Route object for the Historical Kilometer route</returns>
-        public static void LoadHistoricalKilometerRoute()
+        public static Route.Route LoadHistoricalKilometerRoute()
         {
             throw new NotImplementedException();
         }
@@ -34,7 +34,7 @@ namespace VVVOnTheWay.FileIO
         /// Loads/creates the Blind Walls Route, which can be retrieved as this class' attributes
         /// </summary>
         /// <returns>The Route object for the Blind Walls route</returns>
-        public static void LoadBlindWallsRoute()
+        public static Route.Route LoadBlindWallsRoute()
         {
             throw new NotImplementedException();
         }

@@ -28,7 +28,8 @@ namespace VVVOnTheWay.FileIO
         /// <summary>
         /// Loads the last saved route with user progress from a file, which can be retrieved via this class' attributes
         /// </summary>
-        public static void LoadLastSavedRouteFromFile()
+        /// <returns>Route object of the last saved Route with user progress</returns>
+        public static Route.Route LoadLastSavedRouteFromFile()
         {
             throw new NotImplementedException();
         }
