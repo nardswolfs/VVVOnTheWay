@@ -6,47 +6,60 @@ using System.Threading.Tasks;
 
 namespace VVVOnTheWay.FileIO
 {
+    /// <summary>
+    /// Retrieves and distributes the information about PointsOfInterest of routes
+    /// </summary>
     class FullRouteIO
     {
         /// <summary>
         /// The filepath of the Blind Walls route file
         /// </summary>
-        private string blindWallsFilePath { get; set; }
+        private readonly static string blindWallsFilePath;
 
         /// <summary>
         /// The filepath of the Historical Kilometer route file
         /// </summary>
-        private string historicalKilometerFilePath { get; set; }
+        private readonly static string historicalKilometerFilePath;
+
+        /// <summary>
+        /// The Historical Kilometer Route object with its own information
+        /// </summary>
+        public readonly Route.Route HistoricalKilometerRoute;
+
+        /// <summary>
+        /// The Blind Walls Route object with its own information
+        /// </summary>
+        public readonly Route.Route BlindWallsRoute;
 
         /// <summary>
         /// Constructs an new FullRouteIO object
         /// </summary>
         public FullRouteIO()
         {
-
+            throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Updates the existing routes information 
+        /// Loads/creates the existing routes information 
         /// </summary>
-        /// <exception cref="System.Exception">Thrown when there is no WiFi internet connection available</exception>
-        public void UpdateRoutes()
+        private void loadRoutes()
+        {
+            loadHistoricalKilometerRoute();
+            loadBlindWallsRoute();
+        }
+
+        /// <summary>
+        /// Loads/creates the Historical Kilometer Route, which can be retrieved as this class' attributes
+        /// </summary>
+        private void loadHistoricalKilometerRoute()
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Updates the Historical Kilometer route
+        /// Loads/creates the Blind Walls Route, which can be retrieved as this class' attributes
         /// </summary>
-        public void UpdateHistoricalKilometerRoute()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Updates the Blind Walls Route
-        /// </summary>
-        public void UpdateBlindWallsRoute()
+        private void loadBlindWallsRoute()
         {
             throw new NotImplementedException();
         }
