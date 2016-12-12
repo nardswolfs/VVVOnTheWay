@@ -101,8 +101,8 @@
     <Compile Include="LanguageSelectionPage.xaml.cs">
       <DependentUpon>LanguageSelectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Pages\MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="NotificationSystem\INotification.cs" />
     <Compile Include="NotificationSystem\Notification.cs" />
@@ -110,7 +110,7 @@
     <Compile Include="NotificationSystem\POINotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileIO\RouteProgressIO.cs" />
-    <Compile Include="RouteSelectionPage.xaml.cs">
+    <Compile Include="Pages\RouteSelectionPage.xaml.cs">
       <DependentUpon>RouteSelectionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Route\RouteTest.cs" />
@@ -128,6 +128,7 @@
     <Content Include="Assets\England.png" />
     <Content Include="Assets\help.png" />
     <Content Include="Assets\Netherlands.png" />
+    <Content Include="Assets\settings.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -142,15 +143,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="LanguageSelectionPage.xaml">
+    <Page Include="Pages\LanguageSelectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Pages\MapPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="RouteSelectionPage.xaml">
+    <Page Include="Pages\RouteSelectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

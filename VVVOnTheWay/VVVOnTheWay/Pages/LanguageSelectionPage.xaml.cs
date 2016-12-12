@@ -13,30 +13,39 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace VVVOnTheWay
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class LanguageSelectionPage : Page
     {
-        public MainPage()
+        public LanguageSelectionPage()
         {
             this.InitializeComponent();
-            //testline
         }
 
-        private void LanguageSwitch_Click(object sender, RoutedEventArgs e)
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(RouteSelectionPage));
+            LanguageSelectionFrame.Navigate(typeof(MapPage));
         }
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainPage));
+            LanguageSelectionFrame.Navigate(typeof(MapPage));
             //#TODO: Make GuidePage
+        }
+
+        private void English_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Dutch_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
