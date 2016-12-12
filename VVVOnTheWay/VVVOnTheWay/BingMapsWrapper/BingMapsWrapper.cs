@@ -22,6 +22,11 @@ namespace LocationSystem
         private static uint Accuracy = 10;
 
         /// <summary>
+        /// Double which represents the movementthreshold in meters
+        /// </summary>
+        private static double MovementThreshold = 0.5;
+
+        /// <summary>
         /// Method for checking if the GPS receiver in the windows phone is reachable
         /// </summary>
         /// <returns>returns boolean which represents the accessibility</returns>
@@ -31,12 +36,18 @@ namespace LocationSystem
                 && new Geolocator().LocationStatus != PositionStatus.NotAvailable;
         }
 
-        public static async void notifyOnLocationUpdate(Delegate method)
+        /// <summary>
+        /// Method for listening to changes from the gps locator
+        /// </summary>
+        /// <exception cref="GPSNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
+        /// <param name="method"></param>
+        public static async void notifyOnLocationUpdate(Func<Geoposition, object> method)
         {
             if (!await checkGPSAccessibility())
                 throw new GPSNotAllowed();
-           // Geolocator locator = new Geolocator() {DesiredAccuracyInMeters = Accuracy};
-            //locator.PositionChanged += (object sender, EventArgs args)=> { method.In}
+           Geolocator locator = new Geolocator() {DesiredAccuracyInMeters = Accuracy, MovementThreshold = MovementThreshold};
+            locator.PositionChanged +=
+                (Geolocator sender, PositionChangedEventArgs args) => { method.Invoke(args.Position); };
         }
 
         ///<summary>
