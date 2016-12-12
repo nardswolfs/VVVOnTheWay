@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,9 +33,13 @@ namespace VVVOnTheWay
             BingMapsWrapper.notifyOnLocationUpdate(UpdateUserLocation);
         }
 
-        private object UpdateUserLocation(Geoposition geoposition)
+        private async Task<object> UpdateUserLocation(Geoposition geoposition)
         {
-            Map.Center = geoposition.Coordinate.Point;
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                Map.Center = geoposition.Coordinate.Point;
+            });
+            
             return null;
         }
 
