@@ -8,19 +8,27 @@
     <Application.Resources>
         <Style x:Key="BasicButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="42"/>
-            <Setter Property="Width" Value="240"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Content" Value="Text"/>
             <Setter Property="FontStyle" Value="Italic"/>
-            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderThickness" Value="3"/>
             <Setter Property="BorderBrush" Value="Black"/>
         </Style>
         <Style x:Key="RoundButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="95"/>
-            <Setter Property="Height" Value="95"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="80"/>
             <Setter Property="Background" Value="White"/>
-            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
-    
 </Application>

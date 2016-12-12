@@ -31,5 +31,10 @@ namespace VVVOnTheWay
         {
             LanguageSelectionFrame.Navigate(typeof(MainPage));
         }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageSelectionFrame.Navigate(typeof(MainPage));
+        }
     }
 }

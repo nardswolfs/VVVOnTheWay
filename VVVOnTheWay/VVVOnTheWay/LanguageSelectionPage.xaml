@@ -7,41 +7,34 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Page.Resources>
-        <Style x:Key="basicButtonStyle" TargetType="Button">
-            <Setter Property="FontSize" Value="42"/>
-            <Setter Property="Width" Value="240" />
-            <Setter Property="FontStyle" Value="Italic" />
-            <Setter Property="Margin" Value="10,0,0,0" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="BorderThickness" Value="3"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-        </Style>
-    </Page.Resources>
-
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition x:Name="stackrow" Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="3"
-            Orientation="Horizontal"
-            >
-            <Button 
-                Content="Instellen" 
-                Style="{StaticResource basicButtonStyle}"
-                Click="ApplyButton_Click"
-                />
-            <Button Height="95" Width="95" Background="White" Margin="10,0,0,0">
-                <Image Source="Assets/help.png" Stretch="Uniform"/>
-            </Button>
-        </StackPanel>
+            <StackPanel Grid.Row="3"
+                Orientation="Horizontal"
+                >
+                <Button 
+                    Content="Instellen" 
+                    Style="{StaticResource BasicButtonStyle}"
+                    Click="ApplyButton_Click"
+                    />
+                <Button 
+                    Style="{StaticResource RoundButtonStyle}"
+                    Click="HelpButton_Click"
+                    >
+                    <Image Source="Assets/help.png" Stretch="Uniform"/>
+                </Button>
+            </StackPanel>
+        </Grid>
         <Frame Name="LanguageSelectionFrame"/>
     </Grid>
 </Page>
