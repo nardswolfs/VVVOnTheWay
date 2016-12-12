@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="BingMapsWrapper\BingMapsWrapper.cs" />
+    <Compile Include="FileIO\FullRouteIO.cs" />
     <Compile Include="LanguageSelectionPage.xaml.cs">
       <DependentUpon>LanguageSelectionPage.xaml</DependentUpon>
     </Compile>
@@ -107,6 +108,7 @@
     <Compile Include="NotificationSystem\NotificationSystem.cs" />
     <Compile Include="NotificationSystem\POINotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FileIO\RouteProgressIO.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Route\PointOfInterest.cs" />
     <Compile Include="Route\Route.cs" />
@@ -115,10 +117,11 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\du-NL\Resources.resw" />
     <None Include="VVVOnTheWay_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="Assets\help.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
