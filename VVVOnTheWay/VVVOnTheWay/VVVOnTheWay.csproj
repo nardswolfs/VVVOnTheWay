@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="BingMapsWrapper\BingMapsWrapper.cs" />
+    <Compile Include="FileIO\FullRouteIO.cs" />
     <Compile Include="LanguageSelectionPage.xaml.cs">
       <DependentUpon>LanguageSelectionPage.xaml</DependentUpon>
     </Compile>
@@ -107,6 +108,7 @@
     <Compile Include="NotificationSystem\NotificationSystem.cs" />
     <Compile Include="NotificationSystem\POINotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FileIO\RouteProgressIO.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Route\PointOfInterest.cs" />
     <Compile Include="Route\Route.cs" />
