@@ -19,20 +19,40 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <Button
+                Style="{StaticResource ChooseMenuStyle}"
+                Click="English_Click"
+                >
+                <Image Source="..\Assets/England.png" Stretch="Fill"/>
+            </Button>
+            <Button
+                Grid.Row="1"
+                Style="{StaticResource ChooseMenuStyle}"
+                Click="Dutch_Click"
+                >
+                <Image Source="..\Assets/Netherlands.png" Stretch="Fill"/>
+            </Button>
+            <TextBlock
+                Grid.Row="2"
+                Style="{StaticResource InstructionTextStyle}"
+                Text="Kies een taal"
+                >
+            </TextBlock>
             <StackPanel 
                 Grid.Row="3"
                 Orientation="Horizontal"
+                HorizontalAlignment="Center"
                 >
                 <Button 
-                    Content="{x:Bind Language}" 
                     Style="{StaticResource BasicButtonStyle}"
+                    Content="Instellen" 
                     Click="ApplyButton_Click"
                     />
                 <Button 
                     Style="{StaticResource RoundButtonStyle}"
                     Click="HelpButton_Click"
                     >
-                    <Image Source="Assets/help.png" Stretch="Uniform"/>
+                    <Image Source="..\Assets/help.png" Stretch="Uniform"/>
                 </Button>
             </StackPanel>
         </Grid>
