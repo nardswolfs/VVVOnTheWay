@@ -9,6 +9,6 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Button Width="200" Height="100" Content="languagepage" Click="LanguageSwitch_Click"/>
-        <Frame Name="Frame"></Frame>
+        <Frame Name="Frame"/>
     </Grid>
 </Page>

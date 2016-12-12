@@ -30,7 +30,7 @@ namespace VVVOnTheWay
 
         private void LanguageSwitch_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(LanguageSelectionPage));
+            Frame.Navigate(typeof(RouteSelectionPage));
         }
     }
 }
