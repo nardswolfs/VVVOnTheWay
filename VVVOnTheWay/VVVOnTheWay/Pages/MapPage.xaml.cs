@@ -56,6 +56,11 @@ namespace VVVOnTheWay
             //#TODO: Make GuidePage
         }
 
-       
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+            //#TODO: Make GuidePage
+        }
+
     }
 }

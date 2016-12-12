@@ -20,5 +20,12 @@
             <Image Source="Assets/help.png" Stretch="Uniform"/>
         </Button>
 
+        <Button 
+                    Style="{StaticResource RoundButtonStyle}"
+                    Click="SettingsButton_Click" Margin="0,-550,0,10"
+                    >
+            <Image Source="Assets/settings.png" Stretch="Uniform"/>
+        </Button>
+
     </Grid>
 </Page>
