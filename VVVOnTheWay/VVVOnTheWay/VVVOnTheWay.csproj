@@ -109,6 +109,9 @@
     <Compile Include="NotificationSystem\POINotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileIO\RouteProgressIO.cs" />
+    <Compile Include="RouteSelectionPage.xaml.cs">
+      <DependentUpon>RouteSelectionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Route\RouteTest.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Route\PointOfInterest.cs" />
@@ -118,12 +121,12 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <PRIResource Include="Strings\en-US\Resources.resw" />
-    <PRIResource Include="Strings\du-NL\Resources.resw" />
     <None Include="VVVOnTheWay_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\England.png" />
     <Content Include="Assets\help.png" />
+    <Content Include="Assets\Netherlands.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -145,6 +148,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RouteSelectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
