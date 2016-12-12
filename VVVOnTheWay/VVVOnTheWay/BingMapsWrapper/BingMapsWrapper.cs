@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Foundation;
 using Windows.Services.Maps;
 using VVVOnTheWay.Route;
 
@@ -26,7 +27,16 @@ namespace LocationSystem
         /// <returns>returns boolean which represents the accessibility</returns>
         private static async Task<bool> checkGPSAccessibility()
         {
-            return (await Geolocator.RequestAccessAsync()) == GeolocationAccessStatus.Allowed;
+            return (await Geolocator.RequestAccessAsync()) == GeolocationAccessStatus.Allowed 
+                && new Geolocator().LocationStatus != PositionStatus.NotAvailable;
+        }
+
+        public static async void notifyOnLocationUpdate(Delegate method)
+        {
+            if (!await checkGPSAccessibility())
+                throw new GPSNotAllowed();
+           // Geolocator locator = new Geolocator() {DesiredAccuracyInMeters = Accuracy};
+            //locator.PositionChanged += (object sender, EventArgs args)=> { method.In}
         }
 
         ///<summary>
@@ -49,9 +59,11 @@ namespace LocationSystem
         /// <returns> double as distance in meters between the two positions</returns>
         public static async Task<double> getDistanceTo(Geoposition source, Geoposition target)
         {
+            
             return (await MapRouteFinder.GetWalkingRouteAsync(source.Coordinate.Point, target.Coordinate.Point)).Route.LengthInMeters;
         }
 
+        
 
         /// <summary>
         /// Method for checking if the user has lost the route.
@@ -64,6 +76,8 @@ namespace LocationSystem
         {
             if (!await checkGPSAccessibility())
                 throw new GPSNotAllowed();
+
+            new Geopoint(new BasicGeoposition() {});
             throw new NotImplementedException();
         }
 
