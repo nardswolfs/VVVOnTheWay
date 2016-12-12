@@ -18,7 +18,5 @@
             <Image Source="Assets/help.png" Stretch="Uniform"/>
         </Button>
 
-        <!--<Maps:MapControl MapServiceToken="DypxObTyzkWM3QVKqeOV~qPZIp3xC8DUMt_rrBW2qCA~At8UUC81s3n5IDAcdRyQftV2iN4zdJraRdCON4mCrwGC9lZ_YLbBJldJh486D9TR"/>-->
-
     </Grid>
 </Page>
