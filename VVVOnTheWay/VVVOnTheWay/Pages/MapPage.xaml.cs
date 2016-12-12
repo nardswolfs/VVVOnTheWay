@@ -8,6 +8,7 @@ using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -29,7 +30,27 @@ namespace VVVOnTheWay
         public MainPage()
         {
             this.InitializeComponent();
+
+            GetUserLocation();
+
+        }
+
+        private async Task GetUserLocation()
+        {
             
+            try
+            {
+                var location = await BingMapsWrapper.getCurrentPosition();
+                Map.Center = location.Coordinate.Point;
+                Map.ZoomLevel = 15;
+                await UpdateUserLocation(location);
+            }
+            catch (GPSNotAllowed)
+            {
+                await new MessageDialog("No GPS Access!", "GPS not functional!").ShowAsync();
+                // TODO take action when no gps
+                // TODO show in language which is chosen
+            }
             BingMapsWrapper.notifyOnLocationUpdate(UpdateUserLocation);
         }
 
