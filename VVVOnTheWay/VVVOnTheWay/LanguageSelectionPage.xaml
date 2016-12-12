@@ -13,17 +13,18 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="3"
+            <StackPanel 
+                Grid.Row="3"
                 Orientation="Horizontal"
                 >
                 <Button 
-                    Content="Instellen" 
+                    Content="{x:Bind Language}" 
                     Style="{StaticResource BasicButtonStyle}"
                     Click="ApplyButton_Click"
                     />
