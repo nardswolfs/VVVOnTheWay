@@ -35,6 +35,7 @@ namespace VVVOnTheWay
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             LanguageSelectionFrame.Navigate(typeof(MainPage));
+            //#TODO: Make GuidePage
         }
     }
 }
