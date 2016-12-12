@@ -37,5 +37,15 @@ namespace VVVOnTheWay
             LanguageSelectionFrame.Navigate(typeof(MainPage));
             //#TODO: Make GuidePage
         }
+
+        private void English_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Dutch_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
