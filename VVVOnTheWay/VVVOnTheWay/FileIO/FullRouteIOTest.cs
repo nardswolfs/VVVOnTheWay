@@ -11,37 +11,33 @@ using Windows.Storage;
 
 namespace VVVOnTheWay.FileIO
 {
+    /// <summary>
+    /// Unit Test class for class FullRouteIO
+    /// </summary>
     class FullRouteIOTest
     {
+        private JsonSerializerSettings settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
+
         public FullRouteIOTest()
         {
-            Route.RouteTest routetest = new Route.RouteTest();
-            List<Point> poi = routetest.PointsOfInterest;
-            
-            TestMethod(poi);
+            TestMethod(new RouteTest().PointsOfInterest);
         }
 
-        public void TestMethod(object totest)
+        public void TestMethod(List<Point> totest)
         {
-            var settings = new JsonSerializerSettings()
-            {
-                TypeNameHandling = TypeNameHandling.All
-            };
-
             string s = JsonConvert.SerializeObject(totest, settings);
             WriteJson(s);
-            ReadJson(settings);
+            ReadJson();
         }
 
-        async void WriteJson(string s)
+        public async void WriteJson(string s)
         {
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             StorageFile sampleFile = await localFolder.CreateFileAsync($"jsontest.json", CreationCollisionOption.ReplaceExisting);
             await Windows.Storage.FileIO.WriteTextAsync(sampleFile, s);
-            Debug.WriteLine("Did it");
         }
 
-        async void ReadJson(JsonSerializerSettings settings)
+        public async void ReadJson()
         {
             try
             {
@@ -49,7 +45,6 @@ namespace VVVOnTheWay.FileIO
                 StorageFile sampleFile = await localFolder.GetFileAsync("jsontest.json");
                 string json = await Windows.Storage.FileIO.ReadTextAsync(sampleFile);
                 List<Point> list = JsonConvert.DeserializeObject<List<Point>>(json, settings);
-                Debug.WriteLine(list[2]);
             } 
             catch (Exception e)
             {
