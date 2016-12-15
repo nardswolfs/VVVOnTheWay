@@ -18,21 +18,27 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LocationSystem;
+using VVVOnTheWay.Route;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace VVVOnTheWay
 {
+
+    
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MapPage : Page
     {
-        public MapPage()
+        private Route.Route route;
+
+        public MapPage(Route.Route route)
         {
             this.InitializeComponent();
-
+            this.route = route;
             GetUserLocation();
+            
 
         }
 
@@ -70,23 +76,23 @@ namespace VVVOnTheWay
             return null;
         }
 
-        private async Task<object> AddPointsOfInterest(Route route)
+        private async Task<object> AddPointsOfInterest()
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-
-
-
-            foreach ()
             {
-                MapIcon icon = new MapIcon()
+                foreach (PointOfInterest poi in route.PointsOfInterest)
                 {
-                    Title = //point name
-                    Location = //point lacation
+                    MapIcon icon = new MapIcon()
+                    {
+                        Title = "" + poi.Title,
+                        Location = poi.Location
+
+                    };
+                    Map.MapElements.Add(icon);
                 }
-            }
 
-            );
-
+        });
+            return null;
         }
 
 
