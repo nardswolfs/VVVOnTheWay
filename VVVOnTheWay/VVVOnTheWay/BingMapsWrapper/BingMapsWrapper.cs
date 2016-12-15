@@ -22,7 +22,7 @@ namespace LocationSystem
         /// Uint which represents the wanted accuracy from the GPS receiver
         /// </summary>
         private static uint Accuracy = 10;
-        
+
 
         /// <summary>
         /// Double which represents the movementthreshold in meters
@@ -35,7 +35,7 @@ namespace LocationSystem
         /// <returns>returns boolean which represents the accessibility</returns>
         private static async Task<bool> CheckGpsAccessibility()
         {
-            return (await Geolocator.RequestAccessAsync()) == GeolocationAccessStatus.Allowed 
+            return (await Geolocator.RequestAccessAsync()) == GeolocationAccessStatus.Allowed
                 && new Geolocator().LocationStatus != PositionStatus.NotAvailable;
         }
 
@@ -44,11 +44,11 @@ namespace LocationSystem
         /// </summary>
         /// <exception cref="GpsNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
         /// <param name="method"></param>
-        public static async void NotifyOnLocationUpdate(Func<Geoposition,object> method)
+        public static async void NotifyOnLocationUpdate(Func<Geoposition, object> method)
         {
             if (!await CheckGpsAccessibility())
                 throw new GpsNotAllowed();
-           Geolocator locator = new Geolocator() {DesiredAccuracyInMeters = Accuracy, MovementThreshold = MovementThreshold};
+            Geolocator locator = new Geolocator() { DesiredAccuracyInMeters = Accuracy, MovementThreshold = MovementThreshold };
             locator.PositionChanged +=
                 (Geolocator sender, PositionChangedEventArgs args) => { method.Invoke(args.Position); };
         }
@@ -61,7 +61,7 @@ namespace LocationSystem
         {
             if (!await CheckGpsAccessibility())
                 throw new GpsNotAllowed();
-            Geolocator locator = new Geolocator() {DesiredAccuracyInMeters = Accuracy};
+            Geolocator locator = new Geolocator() { DesiredAccuracyInMeters = Accuracy };
             return await locator.GetGeopositionAsync();
         }
 
@@ -119,7 +119,7 @@ namespace LocationSystem
             };
         }
 
-       
+
     }
 
     /// <summary>
@@ -127,6 +127,6 @@ namespace LocationSystem
     /// </summary>
     class GpsNotAllowed : Exception
     {
-        
+
     }
 }
