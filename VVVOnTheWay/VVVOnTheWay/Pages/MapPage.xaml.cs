@@ -18,59 +18,136 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LocationSystem;
+using VVVOnTheWay.Route;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace VVVOnTheWay
 {
+
+    
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MapPage : Page
     {
-        public MapPage()
+        private Route.Route route;
+        private MapIcon _userIcon;
+        private MapRouteView _routeView;
+        private Language _language = VVVOnTheWay.Language.ENGLISH;
+
+        public MapPage(Route.Route route)
         {
             this.InitializeComponent();
-
+            BingMapsWrapper.ClearGeofences();
+            this.route = route;
             GetUserLocation();
-
+            AddPointsOfInterest();
+            
         }
 
         private async Task GetUserLocation()
         {
             try
             {
-                var location = await BingMapsWrapper.getCurrentPosition();
+                var location = await BingMapsWrapper.GetCurrentPosition();
                 Map.Center = location.Coordinate.Point;
                 Map.ZoomLevel = 15;
-                await UpdateUserLocation(location);
+                UpdateUserLocation(location);
             }
-            catch (GPSNotAllowed)
+            catch (GpsNotAllowed)
             {
                 await new MessageDialog("No GPS Access!", "GPS not functional!").ShowAsync();
                 // TODO take action when no gps
                 // TODO show in language which is chosen
             }
-            BingMapsWrapper.notifyOnLocationUpdate(UpdateUserLocation);
+            BingMapsWrapper.NotifyOnLocationUpdate((geoposition =>
+            {
+                UpdateUserLocation(geoposition);
+
+                // TODO CHECK IF DISPATCHER IS NEEDED BECAUSE OTHER THREAD
+                return null;
+            }));
+            
+            ListenToNextPointOfInterest();
+            
+
         }
 
-        private async Task<object> UpdateUserLocation(Geoposition geoposition)
+        private async void ShowNewRoute(Geoposition position)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            var nextPoint = GetNextPointOfInterest();
+            if (nextPoint != null)
             {
-                MapIcon icon = new MapIcon()
+                if (_routeView != null)
+                    Map.Routes.Remove(_routeView);
+                _routeView = new MapRouteView(await BingMapsWrapper.GetRouteTo(position.Coordinate.Point, nextPoint.Location));
+                if (_routeView == null)
+                    Map.Routes.Add(_routeView);
+            }
+
+        }
+
+        private async void ListenToNextPointOfInterest()
+        {
+            var point = GetNextPointOfInterest();
+            if (point != null)
+            {
+                await BingMapsWrapper.PointOfInterestEntered((async interest =>
                 {
-                    Title = "YOU",
-                    Location = geoposition.Coordinate.Point
-                };
-                Map.MapElements.Clear();
-                Map.MapElements.Add(icon);
-            });
-            
+                    // TODO SHOW NOTIFICATION THAT POINT OF INTEREST IS REACHED
+                    interest.IsVisited = true;
+                    ListenToNextPointOfInterest();
+                    ShowNewRoute((await BingMapsWrapper.GetCurrentPosition()));
+                    return;
+                }), point);
+            }
+        }
+
+        private Route.Point GetNextPointOfInterest()
+        {
+            foreach (var point in route.RoutePoints)
+                if (!point.IsVisited)
+                    return point;
             return null;
         }
 
-       
+        private void UpdateUserLocation(Geoposition geoposition)
+        {
+            if (_userIcon == null)
+            {
+                _userIcon = new MapIcon()
+                {
+                    Title = "Your Location",
+                    Location = geoposition.Coordinate.Point
+                };
+                Map.MapElements.Add(_userIcon);
+            }
+            else
+            {
+                _userIcon.Location = geoposition.Coordinate.Point;
+            }
+        }
+
+      
+        private void AddPointsOfInterest()
+        {
+            foreach (var poi in route.RoutePoints)
+            {
+                PointOfInterest point = poi as PointOfInterest;
+                if (point != null)
+                {
+                    Map.MapElements.Add(new MapIcon()
+                    {
+                        Title = point.Title[(int) _language],
+                        Location = poi.Location
+
+                    });
+                }
+            }
+        }
+
+
 
         private void LanguageSwitch_Click(object sender, RoutedEventArgs e)
         {
