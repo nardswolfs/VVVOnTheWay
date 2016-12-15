@@ -33,9 +33,12 @@ namespace VVVOnTheWay
         {
             if (DutchButton.BorderBrush == new SolidColorBrush(Colors.Black))
             {
-                //choose Dutch language
+                Settings.setLanguageDutch();
             }
-            //choose English language
+            else
+            {
+                Settings.setLanguageEnglish();
+            }
             LanguageSelectionFrame.Navigate(typeof(MapPage));
         }
 
