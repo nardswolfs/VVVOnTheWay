@@ -34,7 +34,7 @@ namespace VVVOnTheWay
         private Route.Route route;
         private MapIcon _userIcon;
         private MapRouteView _routeView;
-        private Language _language;
+        private Language _language = VVVOnTheWay.Language.ENGLISH;
 
         public MapPage(Route.Route route)
         {
@@ -49,18 +49,18 @@ namespace VVVOnTheWay
         {
             try
             {
-                var location = await BingMapsWrapper.getCurrentPosition();
+                var location = await BingMapsWrapper.GetCurrentPosition();
                 Map.Center = location.Coordinate.Point;
                 Map.ZoomLevel = 15;
                 UpdateUserLocation(location);
             }
-            catch (GPSNotAllowed)
+            catch (GpsNotAllowed)
             {
                 await new MessageDialog("No GPS Access!", "GPS not functional!").ShowAsync();
                 // TODO take action when no gps
                 // TODO show in language which is chosen
             }
-            BingMapsWrapper.notifyOnLocationUpdate((geoposition =>
+            BingMapsWrapper.NotifyOnLocationUpdate((geoposition =>
             {
                 UpdateUserLocation(geoposition);
 
@@ -68,6 +68,47 @@ namespace VVVOnTheWay
                 return null;
             }));
             
+            ListenToNextPointOfInterest();
+            
+
+        }
+
+        private async void ShowNewRoute(Geoposition position)
+        {
+            var nextPoint = GetNextPointOfInterest();
+            if (nextPoint != null)
+            {
+                if (_routeView != null)
+                    Map.Routes.Remove(_routeView);
+                _routeView = new MapRouteView(await BingMapsWrapper.GetRouteTo(position.Coordinate.Point, nextPoint.Location));
+                if (_routeView == null)
+                    Map.Routes.Add(_routeView);
+            }
+
+        }
+
+        private async void ListenToNextPointOfInterest()
+        {
+            var point = GetNextPointOfInterest();
+            if (point != null)
+            {
+                await BingMapsWrapper.PointOfInterestEntered((async interest =>
+                {
+                    // TODO SHOW NOTIFICATION THAT POINT OF INTEREST IS REACHED
+                    interest.IsVisited = true;
+                    ListenToNextPointOfInterest();
+                    ShowNewRoute((await BingMapsWrapper.GetCurrentPosition()));
+                    return;
+                }), point);
+            }
+        }
+
+        private PointOfInterest GetNextPointOfInterest()
+        {
+            foreach (var point in route.PointsOfInterest)
+                if (!point.IsVisited)
+                    return point;
+            return null;
         }
 
         private void UpdateUserLocation(Geoposition geoposition)
@@ -87,12 +128,7 @@ namespace VVVOnTheWay
             }
         }
 
-        private void LoadRoute()
-        {
-            
-        }
-    
-
+      
         private void AddPointsOfInterest()
         {
             foreach (PointOfInterest poi in route.PointsOfInterest)
