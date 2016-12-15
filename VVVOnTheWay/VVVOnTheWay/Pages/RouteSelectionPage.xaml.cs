@@ -39,9 +39,10 @@ namespace VVVOnTheWay
             RouteSelectionFrame.Navigate(typeof(LanguageSelectionPage));
         }
 
-        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            RouteSelectionFrame.Navigate(typeof(GuidePage));
+            var g = new GuidePage();
+            await g.ShowAsync();
         }
 
         private void BlindWallsButton_Click(object sender, RoutedEventArgs e)

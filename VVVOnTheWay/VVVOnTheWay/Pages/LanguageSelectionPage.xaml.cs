@@ -39,9 +39,10 @@ namespace VVVOnTheWay
             LanguageSelectionFrame.Navigate(typeof(MapPage));
         }
 
-        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            LanguageSelectionFrame.Navigate(typeof(GuidePage));
+            var g = new GuidePage();
+            await g.ShowAsync();
         }
 
         private void EnglishButton_Click(object sender, RoutedEventArgs e)

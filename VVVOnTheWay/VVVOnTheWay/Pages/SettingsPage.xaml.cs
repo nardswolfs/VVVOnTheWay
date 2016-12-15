@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace VVVOnTheWay.Pages
 {
-    public sealed partial class GuidePage : ContentDialog
+    public sealed partial class SettingsPage : ContentDialog
     {
-        public GuidePage()
+        public SettingsPage()
         {
             this.InitializeComponent();
         }
