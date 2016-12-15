@@ -25,25 +25,16 @@ namespace VVVOnTheWay.NotificationSystem
         /// <returns> A task to send a push notification. </returns>
         public static void SenToastificationAsync(INotification notification)
         {
-            if (notification.GetType() == typeof(Notification))
-            {
-                ToastNotification textToast = CreateTextToastNotification((Notification) notification);
-                ToastNotificationManager.CreateToastNotifier().Show(textToast);
-            }
-            else if (notification.GetType() == typeof(PoiNotification))
-            {
-                ToastNotification poiToast = CreatePoiToastNotification((PoiNotification) notification);
-                ToastNotificationManager.CreateToastNotifier().Show(poiToast);
-            }
+            ToastNotificationManager.CreateToastNotifier().Show(CreateCompleteToastNotification(notification));
         }
-        
+
         /// <summary>
         /// Creates a task to send a sound notification.
         /// </summary>
         /// <returns> The task to send a vibration notification. </returns>
         public static void SendVibrationNotificationAsync()
         {
-            VibrationDevice.GetDefault().Vibrate(TimeSpan.FromSeconds(2));
+            VibrationDevice.GetDefault().Vibrate(TimeSpan.FromSeconds(5));
         }
 
         /// <summary>
@@ -53,81 +44,47 @@ namespace VVVOnTheWay.NotificationSystem
         /// <returns> A task to send a pop up notification. </returns>
         public static async Task SendPopUpNotificationAsync(Notification notification)
         {
-            await new MessageDialog(notification.Text, notification.Title).ShowAsync();
+            await new MessageDialog(notification.Description, notification.Title).ShowAsync();
         }
 
         /// <summary>
-        /// Creates a toast notification displaying text
+        /// 
         /// </summary>
-        /// <param name="n">the notification that should be displayed</param>
-        /// <returns> a toast notification based on the notification provided</returns>
-        private static ToastNotification CreateTextToastNotification(Notification n)
+        /// <param name="n"> The notification on which the toast is based. </param>
+        /// <returns>The toast notification.</returns>
+        private static ToastNotification CreateCompleteToastNotification(INotification n)
         {
-            ToastVisual visual = new ToastVisual()
+            var preGeneric = new ToastBindingGeneric()
             {
-                BindingGeneric = new ToastBindingGeneric()
+                Children =
                 {
-                    Children =
-                            {
-                                new AdaptiveText()
-                                {
-                                    Text = n.Title
-                                },
-
-                                new AdaptiveText()
-                                {
-                                    Text = n.Text
-                                }
-                            }
-                }
-            };
-            return FinishToastification(visual);            
-        }
-
-        /// <summary>
-        /// Creates a toast notification displaying a POI
-        /// </summary>
-        /// <param name="n">a PoiNotification</param>
-        /// <returns>a toast notification based on the notification provided</returns>
-        private static ToastNotification CreatePoiToastNotification(PoiNotification n)
-        {
-            //TODO add toast audio, also, see todo above for the launch
-            ToastVisual visual = new ToastVisual()
-            {
-                BindingGeneric = new ToastBindingGeneric()
-                {
-                    Children =
+                    new AdaptiveText()
                     {
-                        new AdaptiveText()
-                        {
-                            Text = n.Title
-                        },
+                        Text = n.Title
+                    },
 
-                        new AdaptiveText()
-                        {
-                            Text = n.Description
-                        },
-
-                        new AdaptiveImage()
-                        {
-                            Source = n.ImagePath
-                        }
-                    }
+                    new AdaptiveText()
+                    {
+                        Text = n.Description
+                    },
                 }
             };
-            return FinishToastification(visual);
-        }
 
-        /// <summary>
-        /// Finishes every toast notification
-        /// </summary>
-        /// <param name="visual">the visuals of the toast notification that needs to be finished</param>
-        /// <returns>the finished toast notification</returns>
-        private static ToastNotification FinishToastification(ToastVisual visual)
-        {
-            ToastActionsCustom actions = new ToastActionsCustom()
+            if (n.GetType() == typeof(PoiNotification))
             {
-                Buttons =
+                preGeneric.Children.Add(new AdaptiveImage()
+                {
+                    Source = ((PoiNotification) n).ImagePath
+                });
+            }
+
+            return new ToastNotification(new ToastContent()
+            {
+                Visual = new ToastVisual() {BindingGeneric = preGeneric},
+
+                Actions = new ToastActionsCustom()
+                {
+                    Buttons =
                     {
                         new ToastButton("Pause", "pause")
                         {
@@ -139,26 +96,15 @@ namespace VVVOnTheWay.NotificationSystem
                             ActivationType = ToastActivationType.Background
                         }
                     }
-            };
+                },
 
-            ToastAudio audio = new ToastAudio()
-            {
-                Src = new Uri("ms-winsoundevent:Notification.Reminder")
-            };
+                Audio = new ToastAudio()
+                {
+                    Src = new Uri("ms-winsoundevent:Notification.Reminder")
+                },
 
-            ToastContent content = new ToastContent()
-            {
-                Visual = visual,
-                Actions = actions,
-                Duration = ToastDuration.Short,
-                Audio = audio
-            };
-
-            //Putting the toast in the toaster
-            var toast = new ToastNotification(content.GetXml());
-
-            //Done toasting the toast
-            return toast;
+                Duration = ToastDuration.Short
+            }.GetXml());
         }
     }
 }

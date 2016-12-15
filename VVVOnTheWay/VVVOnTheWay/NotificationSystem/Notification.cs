@@ -17,7 +17,7 @@ namespace VVVOnTheWay.NotificationSystem
         /// Text: A property that contains thet text for notification, when applicable
         /// </summary>
         public string Title { get; }
-        public string Text { get; }
+        public string Description { get; }
 
         /// <summary>
         /// Creates a notification
@@ -27,7 +27,7 @@ namespace VVVOnTheWay.NotificationSystem
         public Notification(string title, string text)
         {
             Title = title;
-            Text = text;
+            Description = text;
         }
     }
 }

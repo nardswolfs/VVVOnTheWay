@@ -10,9 +10,9 @@ namespace VVVOnTheWay.NotificationSystem
     /// <summary>
     /// The test driver for the notification system.
     /// </summary>
-    class NotificationSystemTestDriver
+    static class NotificationSystemTestDriver
     {
-        public async void TestRun()
+        public static async void TestRun()
         {
             var file = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Assets\Netherlands.png");
             Notification testNotification = new Notification("Test 1", "Test 1");
@@ -25,19 +25,19 @@ namespace VVVOnTheWay.NotificationSystem
             Debug.WriteLine("Finished the test");
         }
 
-        public async void Test1(Notification n)
+        public static async void Test1(Notification n)
         {
             Debug.WriteLine("First test");
             await NotificationSystem.SendPopUpNotificationAsync(n);
         }
 
-        public void Test2(Notification n)
+        public static void Test2(Notification n)
         {
             Debug.WriteLine("Second test");
             NotificationSystem.SenToastificationAsync(n);
         }
 
-        public void Test3(PoiNotification n)
+        public static void Test3(PoiNotification n)
         {
             Debug.WriteLine("Third test");
             NotificationSystem.SenToastificationAsync(n);
