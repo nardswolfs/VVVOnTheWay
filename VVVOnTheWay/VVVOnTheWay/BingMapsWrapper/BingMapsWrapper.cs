@@ -65,6 +65,11 @@ namespace LocationSystem
             return await locator.GetGeopositionAsync();
         }
 
+        public static void ClearGeofences()
+        {
+            GeofenceMonitor.Current.Geofences.Clear();
+        }
+
         /// <summary>
         /// Calculate the distance between two geoposition
         /// </summary>
@@ -73,41 +78,44 @@ namespace LocationSystem
         /// <returns> double as distance in meters between the two positions</returns>
         public static async Task<double> getDistanceTo(Geoposition source, Geoposition target)
         {
-            
-            return (await MapRouteFinder.GetWalkingRouteAsync(source.Coordinate.Point, target.Coordinate.Point)).Route.LengthInMeters;
+            return (await getRouteTo(source, target)).LengthInMeters;
         }
 
 
+        /// <summary>
+        /// Calculate the route between two geopositons
+        /// </summary>
+        /// <param name="source">The location of the source as Geoposition</param>
+        /// <param name="target">The location to calculate the distance to</param>
+        /// <returns>MapRoute between the two points <seealso cref="MapRoute"/></returns>
+        public static async Task<MapRoute> getRouteTo(Geoposition source, Geoposition target)
+        {
+            return (await MapRouteFinder.GetWalkingRouteAsync(source.Coordinate.Point, target.Coordinate.Point)).Route;
+        }
+
+
+        public static async Task<MapRoute> getRouteBetween(List<Geopoint> sources)
+        {
+            return (await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(sources)).Route;
+        }
 
         /// <summary>
         /// Method for listening if the user the route has leaved or exited
         /// </summary>
         /// <param name="route">The route the user is using <seealso cref="Route"/></param> 
-        /// <param name="leavedNotifier">Function for notification when user has entered or left the route</param>
-        /// <param name="listenToState">Represents the the state the user needs for getting a notification like notification when user has entered the route <seealso cref="MonitoredGeofenceStates"/></param>
         /// <exception cref="GPSNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
-        public static async Task RouteStateChanged(Route route, Func<GeofenceState, object> leavedNotifier, MonitoredGeofenceStates listenToState)
+        public static async Task PointOfInterestEntered(Func<PointOfInterest, object> notifier, PointOfInterest pointOfInterest)
         {
             if (!await checkGPSAccessibility())
                 throw new GPSNotAllowed();
-            List<Geopoint> geopoints = new List<Geopoint>();
-            foreach (var point in route.PointsOfInterest)
-            {
-                geopoints.Add(point.Location);
-            }
-            MapRouteFinderResult result = (await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(geopoints));
-            var geofence = new Geofence($"Route {route} {listenToState.ToString()}", result.Route.Path, listenToState, true);
+            var geofence = new Geofence($"{pointOfInterest.Title[0]} notifier", new Geocircle(pointOfInterest.Location.Position, 20.0), MonitoredGeofenceStates.Entered, true);
 
             GeofenceMonitor.Current.Geofences.Add(geofence);
             GeofenceMonitor.Current.GeofenceStateChanged += (GeofenceMonitor monitor, object obj) =>
             {
                 foreach (var report in monitor.ReadReports())
-                {
-                    if (report.Geofence.Id == geofence.Id && (int)report.NewState == (int)listenToState)
-                    {
-                        leavedNotifier.Invoke(report.NewState);
-                    }
-                }
+                    if (report.Geofence.Id == geofence.Id)
+                        notifier.Invoke(pointOfInterest);
             };
         }
 
