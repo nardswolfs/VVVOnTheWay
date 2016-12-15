@@ -30,13 +30,12 @@ namespace VVVOnTheWay.FileIO
             WriteJson(s);
             ReadJson();
             Route.Route route = await FullRouteIO.LoadHistoricalKilometerRoute();
-            string routepath = FullRouteIO.HistoricalKilometerFilePath;
         }
 
         public async void WriteJson(string s)
         {
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            StorageFile sampleFile = await localFolder.CreateFileAsync($"historicalkilometer.json", CreationCollisionOption.ReplaceExisting);
+            StorageFile sampleFile = await localFolder.CreateFileAsync($"{FullRouteIO.HistoricalKilometerFileName}.json", CreationCollisionOption.ReplaceExisting);
             await Windows.Storage.FileIO.WriteTextAsync(sampleFile, s);
         }
 

@@ -154,7 +154,6 @@ namespace VVVOnTheWay.Route
             HistoricRoute = new Route(PointsOfInterest);
         }
 
-
         public Route HistoricRoute { get; set; }
     }
 }
