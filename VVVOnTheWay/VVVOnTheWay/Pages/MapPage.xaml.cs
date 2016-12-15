@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LocationSystem;
+using VVVOnTheWay.Pages;
 using VVVOnTheWay.Route;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -154,16 +155,16 @@ namespace VVVOnTheWay
             Frame.Navigate(typeof(RouteSelectionPage));
         }
 
-        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MapPage));
-            //#TODO: Make GuidePage
+            var g = new GuidePage();
+            await g.ShowAsync();
         }
 
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        private async void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MapPage));
-            //#TODO: Make GuidePage
+            var g = new SettingsPage();
+            await g.ShowAsync();
         }
 
        
