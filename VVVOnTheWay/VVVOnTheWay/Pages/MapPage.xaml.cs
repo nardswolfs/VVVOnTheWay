@@ -38,7 +38,7 @@ namespace VVVOnTheWay
             this.InitializeComponent();
             this.route = route;
             GetUserLocation();
-            AddPointsOfInterest();
+            updatePointsOfInterest();
             
 
         }
@@ -77,7 +77,21 @@ namespace VVVOnTheWay
             return null;
         }
 
-        private async Task<object> AddPointsOfInterest()
+        //@TODO new Task for await in BingMapsWrappers.cs
+       private async Task updatePointsOfInterest()
+        {
+            await BingMapsWrapper.getCurrentPosition();
+            try
+            {
+               await addPointsOfInterest();
+            }
+            catch(NullReferenceException)
+            {
+                await new MessageDialog("No route available!").ShowAsync();
+            }
+        }
+
+        private async Task<object> addPointsOfInterest()
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
