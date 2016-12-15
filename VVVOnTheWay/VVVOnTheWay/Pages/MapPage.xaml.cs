@@ -32,15 +32,17 @@ namespace VVVOnTheWay
     public sealed partial class MapPage : Page
     {
         private Route.Route route;
+        private MapIcon _userIcon;
+        private MapRouteView _routeView;
+        private Language _language;
 
         public MapPage(Route.Route route)
         {
             this.InitializeComponent();
             this.route = route;
             GetUserLocation();
-            updatePointsOfInterest();
+            AddPointsOfInterest();
             
-
         }
 
         private async Task GetUserLocation()
@@ -50,7 +52,7 @@ namespace VVVOnTheWay
                 var location = await BingMapsWrapper.getCurrentPosition();
                 Map.Center = location.Coordinate.Point;
                 Map.ZoomLevel = 15;
-                await UpdateUserLocation(location);
+                UpdateUserLocation(location);
             }
             catch (GPSNotAllowed)
             {
@@ -58,56 +60,50 @@ namespace VVVOnTheWay
                 // TODO take action when no gps
                 // TODO show in language which is chosen
             }
-            BingMapsWrapper.notifyOnLocationUpdate(UpdateUserLocation);
+            BingMapsWrapper.notifyOnLocationUpdate((geoposition =>
+            {
+                UpdateUserLocation(geoposition);
+
+                // TODO CHECK IF DISPATCHER IS NEEDED BECAUSE OTHER THREAD
+                return null;
+            }));
+            
         }
 
-        private async Task<object> UpdateUserLocation(Geoposition geoposition)
+        private void UpdateUserLocation(Geoposition geoposition)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            if (_userIcon == null)
             {
-                MapIcon icon = new MapIcon()
+                _userIcon = new MapIcon()
                 {
-                    Title = "YOU",
+                    Title = "Your Location",
                     Location = geoposition.Coordinate.Point
                 };
-                Map.MapElements.Clear();
-                Map.MapElements.Add(icon);
-            });
+                Map.MapElements.Add(_userIcon);
+            }
+            else
+            {
+                _userIcon.Location = geoposition.Coordinate.Point;
+            }
+        }
+
+        private void LoadRoute()
+        {
             
-            return null;
         }
+    
 
-        //@TODO new Task for await in BingMapsWrappers.cs
-       private async Task updatePointsOfInterest()
+        private void AddPointsOfInterest()
         {
-            await BingMapsWrapper.getCurrentPosition();
-            try
+            foreach (PointOfInterest poi in route.PointsOfInterest)
             {
-               await addPointsOfInterest();
-            }
-            catch(NullReferenceException)
-            {
-                await new MessageDialog("No route available!").ShowAsync();
-            }
-        }
-
-        private async Task<object> addPointsOfInterest()
-        {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                foreach (PointOfInterest poi in route.PointsOfInterest)
+                Map.MapElements.Add(new MapIcon()
                 {
-                    MapIcon icon = new MapIcon()
-                    {
-                        Title = "" + poi.Title,
-                        Location = poi.Location
+                    Title = poi.Title[(int)_language],
+                    Location = poi.Location
 
-                    };
-                    Map.MapElements.Add(icon);
-                }
-
-        });
-            return null;
+                });
+            }
         }
 
 
