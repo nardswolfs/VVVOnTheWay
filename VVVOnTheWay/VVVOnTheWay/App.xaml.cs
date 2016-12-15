@@ -31,9 +31,6 @@ namespace VVVOnTheWay
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            //Harmen test
-            //testcode
-            new FileIO.FullRouteIOTest();
         }
 
         /// <summary>
@@ -76,7 +73,7 @@ namespace VVVOnTheWay
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(PasswordPage), e.Arguments);
+                    LoadPreviousRoute(rootFrame);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -105,6 +102,18 @@ namespace VVVOnTheWay
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private async void LoadPreviousRoute(Frame rootFrame)
+        {
+            if (await FileIO.RouteProgressIO.CheckIfLastSavedRouteExists())
+            {
+                rootFrame.Navigate(typeof(MapPage), await FileIO.RouteProgressIO.LoadLastSavedRouteFromFile());
+            }
+            else
+            {
+                rootFrame.Navigate(typeof(PasswordPage));
+            }
         }
     }
 }

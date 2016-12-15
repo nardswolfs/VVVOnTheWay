@@ -29,13 +29,18 @@ namespace VVVOnTheWay
             this.InitializeComponent();
         }
 
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
+            Route.Route selectedRoute;
             if (HistoricalKmButton.BorderBrush == new SolidColorBrush(Colors.Black))
             {
                 //choose historical km route
+                selectedRoute = await FileIO.FullRouteIO.LoadHistoricalKilometerRoute();
+            }
+            else //choose blind walls route
+            {
+                selectedRoute = await FileIO.FullRouteIO.LoadBlindWallsRoute();
             } 
-            //choose blind walls route
             RouteSelectionFrame.Navigate(typeof(LanguageSelectionPage));
         }
 
