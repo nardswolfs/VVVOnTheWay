@@ -24,6 +24,8 @@ namespace VVVOnTheWay
     /// </summary>
     public sealed partial class LanguageSelectionPage : Page
     {
+        private Route.Route route;
+
         public LanguageSelectionPage()
         {
             this.InitializeComponent();
@@ -31,13 +33,18 @@ namespace VVVOnTheWay
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            LanguageSelectionFrame.Navigate(typeof(MapPage));
+            LanguageSelectionFrame.Navigate(typeof(MapPage), route);
         }
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             var g = new GuidePage();
             await g.ShowAsync();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            route = e.Parameter as Route.Route;
         }
 
         private void SetColors()

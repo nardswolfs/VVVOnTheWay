@@ -36,12 +36,15 @@ namespace VVVOnTheWay.FileIO
         /// <returns>Whether there is a saved route available to resume</returns>
         public static async Task<bool> CheckIfLastSavedRouteExists()
         {
-            StorageFile lastSavedRouteFile = await ApplicationData.Current.LocalFolder.GetFileAsync($"{LastSavedRouteFileName}.json");
-            if (File.Exists(lastSavedRouteFile.Path))
+            try
             {
+                StorageFile lastSavedRouteFile = await ApplicationData.Current.LocalFolder.GetFileAsync($"{LastSavedRouteFileName}.json");
                 return true;
             }
-            return false;
+            catch (FileNotFoundException)
+            {
+                return false;
+            }
         }
 
         /// <summary>

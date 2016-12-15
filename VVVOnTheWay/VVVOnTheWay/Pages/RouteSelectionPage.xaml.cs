@@ -31,17 +31,18 @@ namespace VVVOnTheWay
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            Route.Route selectedRoute;
-            if (HistoricalKmButton.BorderBrush == new SolidColorBrush(Colors.Black))
-            {
-                //choose historical km route
-                selectedRoute = await FileIO.FullRouteIO.LoadHistoricalKilometerRoute();
-            }
-            else //choose blind walls route
-            {
-                selectedRoute = await FileIO.FullRouteIO.LoadBlindWallsRoute();
-            } 
-            RouteSelectionFrame.Navigate(typeof(LanguageSelectionPage));
+            Route.Route selectedRoute = await FileIO.FullRouteIO.LoadHistoricalKilometerRoute();
+            //Following code won't function because Blind Walls route is not iplemented yet
+            //if (HistoricalKmButton.BorderBrush == new SolidColorBrush(Colors.Black))
+            //{
+            //    //choose historical km route
+            //    selectedRoute = await FileIO.FullRouteIO.LoadHistoricalKilometerRoute();
+            //}
+            //else //choose blind walls route
+            //{
+            //    selectedRoute = await FileIO.FullRouteIO.LoadBlindWallsRoute(); //not implemented yet
+            //} 
+            RouteSelectionFrame.Navigate(typeof(LanguageSelectionPage), selectedRoute);
         }
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
