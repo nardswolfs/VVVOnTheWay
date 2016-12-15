@@ -39,6 +39,7 @@ namespace VVVOnTheWay
         public MapPage(Route.Route route)
         {
             this.InitializeComponent();
+            BingMapsWrapper.ClearGeofences();
             this.route = route;
             GetUserLocation();
             AddPointsOfInterest();
@@ -103,9 +104,9 @@ namespace VVVOnTheWay
             }
         }
 
-        private PointOfInterest GetNextPointOfInterest()
+        private Route.Point GetNextPointOfInterest()
         {
-            foreach (var point in route.PointsOfInterest)
+            foreach (var point in route.RoutePoints)
                 if (!point.IsVisited)
                     return point;
             return null;
@@ -131,14 +132,18 @@ namespace VVVOnTheWay
       
         private void AddPointsOfInterest()
         {
-            foreach (PointOfInterest poi in route.PointsOfInterest)
+            foreach (var poi in route.RoutePoints)
             {
-                Map.MapElements.Add(new MapIcon()
+                PointOfInterest point = poi as PointOfInterest;
+                if (point != null)
                 {
-                    Title = poi.Title[(int)_language],
-                    Location = poi.Location
+                    Map.MapElements.Add(new MapIcon()
+                    {
+                        Title = point.Title[(int) _language],
+                        Location = poi.Location
 
-                });
+                    });
+                }
             }
         }
 
