@@ -31,11 +31,6 @@ namespace VVVOnTheWay
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DutchButton.BorderBrush == new SolidColorBrush(Colors.Black))
-            {
-                //choose Dutch language
-            }
-            //choose English language
             LanguageSelectionFrame.Navigate(typeof(MapPage));
         }
 
@@ -45,20 +40,36 @@ namespace VVVOnTheWay
             await g.ShowAsync();
         }
 
+        private void SetColors()
+        {
+            if (Settings.Language == VVVOnTheWay.Language.ENGLISH)
+            {
+                EnglishButton.BorderBrush = new SolidColorBrush(Colors.Black);
+                EnglishButton.BorderThickness = new Thickness(3);
+                DutchButton.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                DutchButton.BorderThickness = new Thickness(1);
+            }
+            else
+            {
+                DutchButton.BorderBrush = new SolidColorBrush(Colors.Black);
+                DutchButton.BorderThickness = new Thickness(3);
+                EnglishButton.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                EnglishButton.BorderThickness = new Thickness(1);
+            }
+        }
+
         private void EnglishButton_Click(object sender, RoutedEventArgs e)
         {
-            EnglishButton.BorderBrush = new SolidColorBrush(Colors.Black);
-            EnglishButton.BorderThickness = new Thickness(3);
-            DutchButton.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            DutchButton.BorderThickness = new Thickness(1);
+            Settings.Language = VVVOnTheWay.Language.ENGLISH;
+            SetColors();
         }
 
         private void DutchButton_Click(object sender, RoutedEventArgs e)
         {
-            DutchButton.BorderBrush = new SolidColorBrush(Colors.Black);
-            DutchButton.BorderThickness = new Thickness(3);
-            EnglishButton.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            EnglishButton.BorderThickness = new Thickness(1);
+            Settings.Language = VVVOnTheWay.Language.DUTCH;
+            SetColors();
         }
+
+        
     }
 }
