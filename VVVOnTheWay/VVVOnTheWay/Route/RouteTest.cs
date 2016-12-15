@@ -151,6 +151,7 @@ namespace VVVOnTheWay.Route
                 false,
                 new[] { "null", "null" }, null,
                 new Geopoint(new BasicGeoposition { Latitude = 51.5895, Longitude = 4.77625 })));
+            HistoricRoute = new Route(PointsOfInterest);
         }
 
 
