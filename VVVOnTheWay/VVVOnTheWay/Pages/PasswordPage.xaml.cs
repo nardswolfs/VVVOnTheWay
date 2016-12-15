@@ -38,7 +38,7 @@ namespace VVVOnTheWay
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (PasswordBox.Password == "wachtwoord")
+            if (PasswordBox.Password == ""+Settings.Password)
             {
                 PasswordFrame.Navigate(typeof(RouteSelectionPage));
             }
