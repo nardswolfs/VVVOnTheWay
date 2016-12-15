@@ -38,6 +38,7 @@ namespace VVVOnTheWay
             this.InitializeComponent();
             this.route = route;
             GetUserLocation();
+            AddPointsOfInterest();
             
 
         }

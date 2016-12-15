@@ -26,6 +26,7 @@
                     >
             <Image Source="Assets/settings.png" Stretch="Uniform"/>
         </Button>
+        <Frame Name="MapFrame"/>
 
     </Grid>
 </Page>
