@@ -9,6 +9,7 @@ using Windows.Foundation;
 using Windows.Services.Maps;
 using Windows.UI.Xaml.Controls.Maps;
 using VVVOnTheWay.Route;
+using Point = VVVOnTheWay.Route.Point;
 
 
 namespace LocationSystem
@@ -22,7 +23,7 @@ namespace LocationSystem
         /// Uint which represents the wanted accuracy from the GPS receiver
         /// </summary>
         private static uint Accuracy = 10;
-        
+
 
         /// <summary>
         /// Double which represents the movementthreshold in meters
@@ -35,7 +36,7 @@ namespace LocationSystem
         /// <returns>returns boolean which represents the accessibility</returns>
         private static async Task<bool> CheckGpsAccessibility()
         {
-            return (await Geolocator.RequestAccessAsync()) == GeolocationAccessStatus.Allowed 
+            return (await Geolocator.RequestAccessAsync()) == GeolocationAccessStatus.Allowed
                 && new Geolocator().LocationStatus != PositionStatus.NotAvailable;
         }
 
@@ -44,11 +45,11 @@ namespace LocationSystem
         /// </summary>
         /// <exception cref="GpsNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
         /// <param name="method"></param>
-        public static async void NotifyOnLocationUpdate(Func<Geoposition,object> method)
+        public static async void NotifyOnLocationUpdate(Func<Geoposition, object> method)
         {
             if (!await CheckGpsAccessibility())
                 throw new GpsNotAllowed();
-           Geolocator locator = new Geolocator() {DesiredAccuracyInMeters = Accuracy, MovementThreshold = MovementThreshold};
+            Geolocator locator = new Geolocator() { DesiredAccuracyInMeters = Accuracy, MovementThreshold = MovementThreshold };
             locator.PositionChanged +=
                 (Geolocator sender, PositionChangedEventArgs args) => { method.Invoke(args.Position); };
         }
@@ -61,7 +62,7 @@ namespace LocationSystem
         {
             if (!await CheckGpsAccessibility())
                 throw new GpsNotAllowed();
-            Geolocator locator = new Geolocator() {DesiredAccuracyInMeters = Accuracy};
+            Geolocator locator = new Geolocator() { DesiredAccuracyInMeters = Accuracy };
             return await locator.GetGeopositionAsync();
         }
 
@@ -78,7 +79,7 @@ namespace LocationSystem
         /// <returns> double as distance in meters between the two positions</returns>
         public static async Task<double> GetDistanceTo(Geoposition source, Geoposition target)
         {
-            return (await GetRouteTo(source, target)).LengthInMeters;
+            return (await GetRouteTo(source.Coordinate.Point, target.Coordinate.Point)).LengthInMeters;
         }
 
 
@@ -104,11 +105,11 @@ namespace LocationSystem
         /// </summary>
         /// <param name="route">The route the user is using <seealso cref="Route"/></param> 
         /// <exception cref="GpsNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
-        public static async Task PointOfInterestEntered(Func<PointOfInterest, Task> notifier, PointOfInterest pointOfInterest)
+        public static async Task PointOfInterestEntered(Func<Point, Task> notifier, Point pointOfInterest)
         {
             if (!await CheckGpsAccessibility())
                 throw new GpsNotAllowed();
-            var geofence = new Geofence($"{pointOfInterest.Title[0]} notifier", new Geocircle(pointOfInterest.Location.Position, 20.0), MonitoredGeofenceStates.Entered, true);
+            var geofence = new Geofence($"{pointOfInterest} notifier", new Geocircle(pointOfInterest.Location.Position, 20.0), MonitoredGeofenceStates.Entered, true);
 
             GeofenceMonitor.Current.Geofences.Add(geofence);
             GeofenceMonitor.Current.GeofenceStateChanged += (GeofenceMonitor monitor, object obj) =>
@@ -119,7 +120,7 @@ namespace LocationSystem
             };
         }
 
-       
+
     }
 
     /// <summary>
@@ -127,6 +128,6 @@ namespace LocationSystem
     /// </summary>
     class GpsNotAllowed : Exception
     {
-        
+
     }
 }
