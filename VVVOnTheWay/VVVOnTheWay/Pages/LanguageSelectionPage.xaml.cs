@@ -63,5 +63,7 @@ namespace VVVOnTheWay
             EnglishButton.BorderBrush = new SolidColorBrush(Colors.Transparent);
             EnglishButton.BorderThickness = new Thickness(1);
         }
+
+        
     }
 }
