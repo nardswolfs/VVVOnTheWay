@@ -88,9 +88,9 @@ namespace LocationSystem
         /// <param name="source">The location of the source as Geoposition</param>
         /// <param name="target">The location to calculate the distance to</param>
         /// <returns>MapRoute between the two points <seealso cref="MapRoute"/></returns>
-        public static async Task<MapRoute> GetRouteTo(Geoposition source, Geoposition target)
+        public static async Task<MapRoute> GetRouteTo(Geopoint source, Geopoint target)
         {
-            return (await MapRouteFinder.GetWalkingRouteAsync(source.Coordinate.Point, target.Coordinate.Point)).Route;
+            return (await MapRouteFinder.GetWalkingRouteAsync(source, target)).Route;
         }
 
 
@@ -104,7 +104,7 @@ namespace LocationSystem
         /// </summary>
         /// <param name="route">The route the user is using <seealso cref="Route"/></param> 
         /// <exception cref="GpsNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
-        public static async Task PointOfInterestEntered(Func<PointOfInterest, object> notifier, PointOfInterest pointOfInterest)
+        public static async Task PointOfInterestEntered(Func<PointOfInterest, Task> notifier, PointOfInterest pointOfInterest)
         {
             if (!await CheckGpsAccessibility())
                 throw new GpsNotAllowed();
