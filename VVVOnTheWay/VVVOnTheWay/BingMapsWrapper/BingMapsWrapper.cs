@@ -16,7 +16,7 @@ namespace LocationSystem
     /// <summary>
     /// This class has as function to provide a bridge between the GPS Api from the windows device and the software.
     /// </summary>
-    class BingMapsWrapper
+    static class BingMapsWrapper
     {
         /// <summary>
         /// Uint which represents the wanted accuracy from the GPS receiver
@@ -33,7 +33,7 @@ namespace LocationSystem
         /// Method for checking if the GPS receiver in the windows phone is reachable
         /// </summary>
         /// <returns>returns boolean which represents the accessibility</returns>
-        private static async Task<bool> checkGPSAccessibility()
+        private static async Task<bool> CheckGpsAccessibility()
         {
             return (await Geolocator.RequestAccessAsync()) == GeolocationAccessStatus.Allowed 
                 && new Geolocator().LocationStatus != PositionStatus.NotAvailable;
@@ -42,12 +42,12 @@ namespace LocationSystem
         /// <summary>
         /// Method for listening to changes from the gps locator
         /// </summary>
-        /// <exception cref="GPSNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
+        /// <exception cref="GpsNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
         /// <param name="method"></param>
-        public static async void notifyOnLocationUpdate(Func<Geoposition,object> method)
+        public static async void NotifyOnLocationUpdate(Func<Geoposition,object> method)
         {
-            if (!await checkGPSAccessibility())
-                throw new GPSNotAllowed();
+            if (!await CheckGpsAccessibility())
+                throw new GpsNotAllowed();
            Geolocator locator = new Geolocator() {DesiredAccuracyInMeters = Accuracy, MovementThreshold = MovementThreshold};
             locator.PositionChanged +=
                 (Geolocator sender, PositionChangedEventArgs args) => { method.Invoke(args.Position); };
@@ -55,12 +55,12 @@ namespace LocationSystem
 
         ///<summary>
         /// Get the current location of the user as a GeoPosition
-        /// <exception cref="GPSNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
+        /// <exception cref="GpsNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
         /// <returns> Geoposition as gps information</returns>
-        public static async Task<Geoposition> getCurrentPosition()
+        public static async Task<Geoposition> GetCurrentPosition()
         {
-            if (!await checkGPSAccessibility())
-                throw new GPSNotAllowed();
+            if (!await CheckGpsAccessibility())
+                throw new GpsNotAllowed();
             Geolocator locator = new Geolocator() {DesiredAccuracyInMeters = Accuracy};
             return await locator.GetGeopositionAsync();
         }
@@ -76,9 +76,9 @@ namespace LocationSystem
         /// <param name="source">The location of the source as Geoposition</param>
         /// <param name="target">The location to calculate the distance to</param>
         /// <returns> double as distance in meters between the two positions</returns>
-        public static async Task<double> getDistanceTo(Geoposition source, Geoposition target)
+        public static async Task<double> GetDistanceTo(Geoposition source, Geoposition target)
         {
-            return (await getRouteTo(source, target)).LengthInMeters;
+            return (await GetRouteTo(source, target)).LengthInMeters;
         }
 
 
@@ -88,13 +88,13 @@ namespace LocationSystem
         /// <param name="source">The location of the source as Geoposition</param>
         /// <param name="target">The location to calculate the distance to</param>
         /// <returns>MapRoute between the two points <seealso cref="MapRoute"/></returns>
-        public static async Task<MapRoute> getRouteTo(Geoposition source, Geoposition target)
+        public static async Task<MapRoute> GetRouteTo(Geoposition source, Geoposition target)
         {
             return (await MapRouteFinder.GetWalkingRouteAsync(source.Coordinate.Point, target.Coordinate.Point)).Route;
         }
 
 
-        public static async Task<MapRoute> getRouteBetween(List<Geopoint> sources)
+        public static async Task<MapRoute> GetRouteBetween(List<Geopoint> sources)
         {
             return (await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(sources)).Route;
         }
@@ -103,11 +103,11 @@ namespace LocationSystem
         /// Method for listening if the user the route has leaved or exited
         /// </summary>
         /// <param name="route">The route the user is using <seealso cref="Route"/></param> 
-        /// <exception cref="GPSNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
+        /// <exception cref="GpsNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
         public static async Task PointOfInterestEntered(Func<PointOfInterest, object> notifier, PointOfInterest pointOfInterest)
         {
-            if (!await checkGPSAccessibility())
-                throw new GPSNotAllowed();
+            if (!await CheckGpsAccessibility())
+                throw new GpsNotAllowed();
             var geofence = new Geofence($"{pointOfInterest.Title[0]} notifier", new Geocircle(pointOfInterest.Location.Position, 20.0), MonitoredGeofenceStates.Entered, true);
 
             GeofenceMonitor.Current.Geofences.Add(geofence);
@@ -125,7 +125,7 @@ namespace LocationSystem
     /// <summary>
     /// Exception which is thrown when GPS receiver does not allow access to the current location
     /// </summary>
-    class GPSNotAllowed : Exception
+    class GpsNotAllowed : Exception
     {
         
     }
