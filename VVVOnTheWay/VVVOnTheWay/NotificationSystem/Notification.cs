@@ -12,8 +12,12 @@ namespace VVVOnTheWay.NotificationSystem
     /// </summary>
     class Notification : INotification
     {
+        /// <summary>
+        /// Title: The property containing the tile for this notification
+        /// Text: A property that contains thet text for notification, when applicable
+        /// </summary>
         public string Title { get; }
-        public string Description { get; }
+        public string Text { get; }
 
         /// <summary>
         /// Creates a notification
@@ -22,8 +26,8 @@ namespace VVVOnTheWay.NotificationSystem
         /// <param name="text">The text of the notification</param>
         public Notification(string title, string text)
         {
-            this.Title = title;
-            this.Description = text;
+            Title = title;
+            Text = text;
         }
     }
 }
