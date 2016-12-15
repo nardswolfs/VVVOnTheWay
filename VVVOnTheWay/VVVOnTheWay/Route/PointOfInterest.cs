@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,15 +8,26 @@ using Windows.Devices.Geolocation;
 
 namespace VVVOnTheWay.Route
 {
-    class Point
+    public class Point
     {
         /// <summary>
         /// The Geoposition from the POI's location.
         /// </summary>
-        public Geopoint Location { get; set; }
+        
+        [JsonIgnore]
+        public Geopoint Location { get { return new Geopoint(new BasicGeoposition() { Latitude = jsonPosition[0], Longitude = jsonPosition[1] }); } set {jsonPosition = new double[] { Location.Position.Latitude, Location.Position.Longitude } ; } }
+      
+        public double[] jsonPosition { get; set; }
+        /// <summary>
+        /// Whether the POI is visited or not.
+        /// </summary>
+        public bool IsVisited { get; set; }
+        //This constructor is needed for JSON
+        public Point() { }
 
         public Point(Geopoint location)
         {
+            jsonPosition = new double[] { location.Position.Latitude, location.Position.Longitude };
             Location = location;
         }
     }
@@ -25,8 +37,11 @@ namespace VVVOnTheWay.Route
     /// - If the point has been visited or not.
     /// - Get a notification with the information.
     /// </summary>
-    class PointOfInterest : Point
+   public class PointOfInterest : Point
     {
+        //JSON loves this
+        public PointOfInterest() { }
+
         /// <summary>
         /// Title of the POI in 2 language's.
         /// </summary>
@@ -35,10 +50,7 @@ namespace VVVOnTheWay.Route
         /// Description of the POI in 2 language's.
         /// </summary>
         public string[] Description { get; set; }
-        /// <summary>
-        /// Whether the POI is visited or not.
-        /// </summary>
-        public bool IsVisited { get; set; }
+        
         /// <summary>
         /// The path to get the audio file associated with the POI in both languages.
         /// </summary>

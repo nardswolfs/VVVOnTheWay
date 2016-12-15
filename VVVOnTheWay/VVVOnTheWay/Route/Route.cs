@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace VVVOnTheWay.Route
 {
-    class Route
+   public class Route
     {   
         /// <summary>
         /// The list of POI that are on this route.
         /// </summary>
-        public List<PointOfInterest> PointsOfInterest { get; set; }
+        public List<Point> RoutePoints { get; set; }
         /// <summary>
         /// Default constructor.
         /// </summary>
-        /// <param name="pointsOfInterest">sets <seealso cref="PointsOfInterest"/></param>
-        public Route(List<PointOfInterest> pointsOfInterest)
+        /// <param name="routePoints">sets <seealso cref="RoutePoints"/></param>
+        public Route(List<Point> routePoints)
         {
-            PointsOfInterest = pointsOfInterest;
+            RoutePoints = routePoints;
         }
         /// <summary>
         /// Saves the route into a file located at the specified location.
