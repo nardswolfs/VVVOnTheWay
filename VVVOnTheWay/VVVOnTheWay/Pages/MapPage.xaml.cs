@@ -33,7 +33,7 @@ namespace VVVOnTheWay
         {
             this.InitializeComponent();
 
-            GetUserLocation();
+            //GetUserLocation();
 
         }
 

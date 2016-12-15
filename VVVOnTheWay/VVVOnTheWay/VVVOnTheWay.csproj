@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="BingMapsWrapper\BingMapsWrapper.cs" />
     <Compile Include="FileIO\FullRouteIO.cs" />
+    <Compile Include="FileIO\FullRouteIOTest.cs" />
     <Compile Include="Pages\GuidePage.xaml.cs">
       <DependentUpon>GuidePage.xaml</DependentUpon>
     </Compile>
