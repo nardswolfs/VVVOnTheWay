@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Devices.Geolocation.Geofencing;
 using Windows.Foundation;
 using Windows.Services.Maps;
+using Windows.UI.Xaml.Controls.Maps;
 using VVVOnTheWay.Route;
 
 
@@ -20,6 +22,7 @@ namespace LocationSystem
         /// Uint which represents the wanted accuracy from the GPS receiver
         /// </summary>
         private static uint Accuracy = 10;
+        
 
         /// <summary>
         /// Double which represents the movementthreshold in meters
@@ -74,24 +77,41 @@ namespace LocationSystem
             return (await MapRouteFinder.GetWalkingRouteAsync(source.Coordinate.Point, target.Coordinate.Point)).Route.LengthInMeters;
         }
 
-        
+
 
         /// <summary>
-        /// Method for checking if the user has lost the route.
+        /// Method for listening if the user the route has leaved or exited
         /// </summary>
-        /// <param name="source">The location of the user as Geoposition <seealso cref="Geoposition"/></param>
-        /// <param name="route">The route the user is using <seealso cref="Route"/></param>
+        /// <param name="route">The route the user is using <seealso cref="Route"/></param> 
+        /// <param name="leavedNotifier">Function for notification when user has entered or left the route</param>
+        /// <param name="listenToState">Represents the the state the user needs for getting a notification like notification when user has entered the route <seealso cref="MonitoredGeofenceStates"/></param>
         /// <exception cref="GPSNotAllowed">Exception when system has deactivated GPS or user does not allow GPS to this application</exception>
-        /// <returns>returns a boolean that is true if the user has lost the route</returns>
-        public static async Task<Boolean> RouteLeaved(Geoposition source, Route route)
+        public static async Task RouteStateChanged(Route route, Func<GeofenceState, object> leavedNotifier, MonitoredGeofenceStates listenToState)
         {
             if (!await checkGPSAccessibility())
                 throw new GPSNotAllowed();
+            List<Geopoint> geopoints = new List<Geopoint>();
+            foreach (var point in route.PointsOfInterest)
+            {
+                geopoints.Add(point.Location);
+            }
+            MapRouteFinderResult result = (await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(geopoints));
+            var geofence = new Geofence($"Route {route} {listenToState.ToString()}", result.Route.Path, listenToState, true);
 
-            new Geopoint(new BasicGeoposition() {});
-            throw new NotImplementedException();
+            GeofenceMonitor.Current.Geofences.Add(geofence);
+            GeofenceMonitor.Current.GeofenceStateChanged += (GeofenceMonitor monitor, object obj) =>
+            {
+                foreach (var report in monitor.ReadReports())
+                {
+                    if (report.Geofence.Id == geofence.Id && (int)report.NewState == (int)listenToState)
+                    {
+                        leavedNotifier.Invoke(report.NewState);
+                    }
+                }
+            };
         }
 
+       
     }
 
     /// <summary>
