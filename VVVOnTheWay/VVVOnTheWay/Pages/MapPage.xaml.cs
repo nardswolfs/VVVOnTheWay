@@ -70,7 +70,26 @@ namespace VVVOnTheWay
             return null;
         }
 
-       
+        private async Task<object> AddPointsOfInterest(Route route)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+
+
+
+            foreach ()
+            {
+                MapIcon icon = new MapIcon()
+                {
+                    Title = //point name
+                    Location = //point lacation
+                }
+            }
+
+            );
+
+        }
+
+
 
         private void LanguageSwitch_Click(object sender, RoutedEventArgs e)
         {
