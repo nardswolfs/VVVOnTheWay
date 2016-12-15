@@ -33,6 +33,7 @@ namespace VVVOnTheWay
             this.Suspending += OnSuspending;
             //Harmen test
             //testcode
+            new FileIO.FullRouteIOTest();
         }
 
         /// <summary>
