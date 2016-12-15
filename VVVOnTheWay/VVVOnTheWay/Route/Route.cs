@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VVVOnTheWay.Route
 {
-    class Route
+   public class Route
     {   
         /// <summary>
         /// The list of POI that are on this route.
@@ -15,7 +15,7 @@ namespace VVVOnTheWay.Route
         /// <summary>
         /// Default constructor.
         /// </summary>
-        /// <param name="pointsOfInterest">sets <seealso cref="PointsOfInterest"/></param>
+        /// <param name="routePoints">sets <seealso cref="RoutePoints"/></param>
         public Route(List<Point> routePoints)
         {
             RoutePoints = routePoints;
