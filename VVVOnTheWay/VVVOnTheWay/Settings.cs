@@ -9,7 +9,7 @@ namespace VVVOnTheWay
    /// <summary>
    /// Settings for the application that are generally used.
    /// </summary>
-    class Settings
+   static class Settings
    {
        ///  <value>
        ///  Default language is set to ENGLISH
