@@ -25,8 +25,6 @@ using VVVOnTheWay.Route;
 
 namespace VVVOnTheWay
 {
-
-    
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -146,13 +144,6 @@ namespace VVVOnTheWay
                     });
                 }
             }
-        }
-
-
-
-        private void LanguageSwitch_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(RouteSelectionPage));
         }
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
