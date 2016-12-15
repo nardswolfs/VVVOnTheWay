@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,6 @@ namespace VVVOnTheWay.NotificationSystem
         /// Description: A description to be used with this notification.
         /// </summary>
         public string Title { get; }
-        public string AudioPath { get; }
         public string ImagePath { get; }
         public string Description { get; }
 
@@ -29,14 +29,12 @@ namespace VVVOnTheWay.NotificationSystem
         /// Creates a Poi notification
         /// </summary>
         /// <param name="title">The name of the notification</param>
-        /// <param name="audio">The path to the audio file that needs to be played</param>
         /// <param name="imagePath">The path to the image file that needs to be shown</param>
         /// <param name="description">The description of the POI</param>
-        public PoiNotification(string title, string audio, string imagePath, string description)
+        public PoiNotification(string title, string imagePath, string description)
         {
             Title = title;
-            AudioPath = audio;
-            ImagePath = imagePath;
+            if (File.Exists(imagePath)) { ImagePath = imagePath; }
             Description = description;
         }
     }

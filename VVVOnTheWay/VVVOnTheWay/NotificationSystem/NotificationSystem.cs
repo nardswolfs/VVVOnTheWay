@@ -23,44 +23,25 @@ namespace VVVOnTheWay.NotificationSystem
         /// </summary>
         /// <param name="notification"> A notification implementing the <see cref="INotification"/> interface.</param>
         /// <returns> A task to send a push notification. </returns>
-        //TODO add a way to send the toastification
-        public static async Task SenToastificationAsync(INotification notification)
+        public static void SenToastificationAsync(INotification notification)
         {
             if (notification.GetType() == typeof(Notification))
             {
                 ToastNotification textToast = CreateTextToastNotification((Notification) notification);
-                textToast.Tag = "textToast";
                 ToastNotificationManager.CreateToastNotifier().Show(textToast);
             }
             else if (notification.GetType() == typeof(PoiNotification))
             {
                 ToastNotification poiToast = CreatePoiToastNotification((PoiNotification) notification);
-                poiToast.Tag = "poiToast";
                 ToastNotificationManager.CreateToastNotifier().Show(poiToast);
-            }
-            else
-            {
-                throw new ArgumentException();
             }
         }
         
-
-        /// <summary>
-        /// Creates a task to send a sound notification.
-        /// </summary>
-        /// <returns> The task to send a sound notification. </returns>
-        //TODO add a way to send the sound notifiction. This will probably become toasts with sound
-        public static async Task SendSoundNotificationAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Creates a task to send a sound notification.
         /// </summary>
         /// <returns> The task to send a vibration notification. </returns>
-        //TODO add a way to send the vibration notifiction.
-        public static async Task SendVibrationNotificationAsync()
+        public static void SendVibrationNotificationAsync()
         {
             VibrationDevice.GetDefault().Vibrate(TimeSpan.FromSeconds(2));
         }
@@ -72,7 +53,7 @@ namespace VVVOnTheWay.NotificationSystem
         /// <returns> A task to send a pop up notification. </returns>
         public static async Task SendPopUpNotificationAsync(Notification notification)
         {
-            new MessageDialog(notification.Text, notification.Title).ShowAsync();
+            await new MessageDialog(notification.Text, notification.Title).ShowAsync();
         }
 
         /// <summary>
@@ -82,7 +63,6 @@ namespace VVVOnTheWay.NotificationSystem
         /// <returns> a toast notification based on the notification provided</returns>
         private static ToastNotification CreateTextToastNotification(Notification n)
         {
-            //TODO Under construction, don't know exactly what the launch does, but ill look into it
             ToastVisual visual = new ToastVisual()
             {
                 BindingGeneric = new ToastBindingGeneric()
@@ -161,10 +141,17 @@ namespace VVVOnTheWay.NotificationSystem
                     }
             };
 
+            ToastAudio audio = new ToastAudio()
+            {
+                Src = new Uri("ms-winsoundevent:Notification.Reminder")
+            };
+
             ToastContent content = new ToastContent()
             {
                 Visual = visual,
-                Actions = actions
+                Actions = actions,
+                Duration = ToastDuration.Short,
+                Audio = audio
             };
 
             //Putting the toast in the toaster
