@@ -145,6 +145,8 @@
     <Content Include="Assets\help.png" />
     <Content Include="Assets\Netherlands.png" />
     <Content Include="Assets\play.png" />
+    <Content Include="Assets\Point visited.png" />
+    <Content Include="Assets\Point.png" />
     <Content Include="Assets\settings.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />

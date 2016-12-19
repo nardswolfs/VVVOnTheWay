@@ -182,7 +182,7 @@ namespace VVVOnTheWay
                 {
                     Map.MapElements.Add(new MapIcon()
                     {
-                        Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Poi.png")),
+                        Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Point.png")),
                         Title = point.Title[(int) _language],
                         Location = poi.Location
 
