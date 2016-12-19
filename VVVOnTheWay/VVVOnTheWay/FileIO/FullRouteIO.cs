@@ -34,7 +34,7 @@ namespace VVVOnTheWay.FileIO
             StorageFile historicalKilometerFile;
             try
             {
-                historicalKilometerFile = await datafolder.GetFileAsync($"{HistoricalKilometerFileName}.jydjson");
+                historicalKilometerFile = await datafolder.GetFileAsync($"{HistoricalKilometerFileName}.json");
             }
             catch (FileNotFoundException)
             {
