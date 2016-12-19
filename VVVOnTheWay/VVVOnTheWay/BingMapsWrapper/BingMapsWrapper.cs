@@ -123,10 +123,7 @@ namespace LocationSystem
             {
                 foreach (var report in monitor.ReadReports())
                     if (report.Geofence.Id == geofence.Id)
-                    {
                         notifier.Invoke(pointOfInterest);
-                    }
-                       
             };
         }
 
