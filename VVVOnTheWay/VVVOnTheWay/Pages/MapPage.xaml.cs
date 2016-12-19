@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Navigation;
 using LocationSystem;
 using VVVOnTheWay.Pages;
 using VVVOnTheWay.Route;
+using Windows.Storage.Streams;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -142,10 +143,12 @@ namespace VVVOnTheWay
                 {
                     Map.MapElements.Add(new MapIcon()
                     {
+                        Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Poi.png")),
                         Title = point.Title[(int) _language],
                         Location = poi.Location
 
                     });
+                    
                 }
             }
         }
