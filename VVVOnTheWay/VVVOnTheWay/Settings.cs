@@ -9,7 +9,7 @@ namespace VVVOnTheWay
    /// <summary>
    /// Settings for the application that are generally used.
    /// </summary>
-    class Settings
+   static class Settings
    {
        ///  <value>
        ///  Default language is set to ENGLISH
@@ -25,12 +25,15 @@ namespace VVVOnTheWay
         /// The correct password that is needed to login, 
         /// must completely match to correctly login.
         /// </summary>
-       public static string Password = "";
+        public static string Password = "wachtwoord";
         
         /// <summary>
         /// The path to saved progress, progress of a Route that has not been finished.
         /// </summary>
        public static string ProgressPath = "";
+
+        
+       
 
        
    }
