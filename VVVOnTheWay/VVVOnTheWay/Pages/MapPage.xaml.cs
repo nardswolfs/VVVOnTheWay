@@ -35,14 +35,17 @@ namespace VVVOnTheWay
         private MapRouteView _routeView;
         private Language _language = VVVOnTheWay.Language.ENGLISH;
 
-        public MapPage(Route.Route route)
+        public MapPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            route = e.Parameter as Route.Route;
             BingMapsWrapper.ClearGeofences();
-            this.route = route;
-            GetUserLocation();
+            await GetUserLocation();
             AddPointsOfInterest();
-            
         }
 
         private async Task GetUserLocation()
@@ -60,12 +63,13 @@ namespace VVVOnTheWay
                 // TODO take action when no gps
                 // TODO show in language which is chosen
             }
-            BingMapsWrapper.NotifyOnLocationUpdate((geoposition =>
+            BingMapsWrapper.NotifyOnLocationUpdate((async geoposition =>
             {
-                UpdateUserLocation(geoposition);
-
+                await Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, () =>
+                 {
+                     UpdateUserLocation(geoposition);
+                 });
                 // TODO CHECK IF DISPATCHER IS NEEDED BECAUSE OTHER THREAD
-                return null;
             }));
             
             ListenToNextPointOfInterest();
