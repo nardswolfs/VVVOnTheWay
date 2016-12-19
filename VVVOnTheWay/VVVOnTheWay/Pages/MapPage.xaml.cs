@@ -108,7 +108,12 @@ namespace VVVOnTheWay
                 {
                     await Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, async () =>
                     {
-                        // TODO SHOW NOTIFICATION THAT POINT OF INTEREST IS REACHED
+                        if (interest.GetType() == typeof(PointOfInterest))
+                        {
+                            PointOfInterest poi = ((PointOfInterest)interest);
+                            NotificationSystem.NotificationSystem.SenToastificationAsync(poi.GetNotification());
+                            NotificationSystem.NotificationSystem.SendVibrationNotificationAsync();
+                        }
                         interest.IsVisited = true;
                         ListenToNextPointOfInterest();
                         ShowNewRoute((await BingMapsWrapper.GetCurrentPosition()));
