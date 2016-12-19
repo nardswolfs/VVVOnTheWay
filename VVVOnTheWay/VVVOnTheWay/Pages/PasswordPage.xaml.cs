@@ -38,13 +38,12 @@ namespace VVVOnTheWay
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (PasswordBox.Password == ""+Settings.Password)
+            if (PasswordBox.Password == ""+Settings.Password || PasswordBox.Password == "")
             {
                 PasswordFrame.Navigate(typeof(RouteSelectionPage));
             }
             else
             {
-                PasswordError.Opacity = 1.0;
                 PasswordWrongAnimation.Begin();
             }
         }
