@@ -32,9 +32,8 @@ namespace VVVOnTheWay
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            NotificationSystemTestDriver.TestRun();
-            //var g = new GuidePage();
-            //await g.ShowAsync();
+            var g = new GuidePage();
+            await g.ShowAsync();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
