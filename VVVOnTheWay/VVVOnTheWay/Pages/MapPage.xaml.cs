@@ -119,13 +119,12 @@ namespace VVVOnTheWay
                     await Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, async () =>
                     {
                         if (interest.IsVisited) return;
-                        // TODO SHOW NOTIFICATION THAT POINT OF INTEREST IS REACHED
                         if (interest.GetType() == typeof(PointOfInterest))
                         {
                             PointOfInterest poi = ((PointOfInterest)interest);
                             NotificationSystem.NotificationSystem.SenToastificationAsync(poi.GetNotification());
                             NotificationSystem.NotificationSystem.SendVibrationNotificationAsync();
-                            var g = new PointDataPage(poi.Title, poi.Description, poi.ImagePath, poi.AudioPath);
+                            var g = new PointDataPage(poi);
                             await g.ShowAsync();
 
                         }

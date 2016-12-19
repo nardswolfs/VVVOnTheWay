@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using VVVOnTheWay.Route;
 
 // The Content Dialog item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,20 +23,14 @@ namespace VVVOnTheWay.Pages
 {
     public sealed partial class PointDataPage : ContentDialog
     {
-        private string[] _poiAudioPath;
+        private PointOfInterest _poi;
 
-        public PointDataPage(string[] poiTitle, string[] poiDescription, string poiImagePath, string[] poiAudioPath)
+        public PointDataPage(PointOfInterest poi)
         {
             this.InitializeComponent();
-            if (Settings.Language == VVVOnTheWay.Language.ENGLISH)
-            {
-                PointInfoText.Text = poiTitle[1] + "\n\n" + poiDescription[1];
-            }
-            else
-            {
-                PointInfoText.Text = poiTitle[2] + "\n\n" + poiDescription[2];
-            }
-            _poiAudioPath = poiAudioPath;
+            _poi = poi;
+            PointInfoText.Text = _poi.Title[(int)VVVOnTheWay.Settings.Language] + "\n\n" + _poi.Description[(int)VVVOnTheWay.Settings.Language];
+            PointPicture.Source = new BitmapImage(new Uri(_poi.ImagePath));
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
