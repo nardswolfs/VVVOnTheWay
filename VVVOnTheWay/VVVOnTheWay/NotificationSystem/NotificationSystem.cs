@@ -68,29 +68,15 @@ namespace VVVOnTheWay.NotificationSystem
                 Children = {}
             };
 
-            if (string.IsNullOrEmpty(n.Title))
-            {
-                preGeneric.Children.Add(new AdaptiveText()
-                {
-                    Text = string.Empty
-                });
-            }
-            else
+            if (!string.IsNullOrEmpty(n.Title))
             {
                 preGeneric.Children.Add(new AdaptiveText()
                 {
                     Text = n.Title
                 });
             }
-
-            if (string.IsNullOrEmpty(n.Description))
-            {
-                preGeneric.Children.Add(new AdaptiveText()
-                {
-                    Text = string.Empty
-                });
-            }
-            else
+            
+            if (!string.IsNullOrEmpty(n.Description))
             {
                 preGeneric.Children.Add(new AdaptiveText()
                 {
