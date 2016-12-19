@@ -161,6 +161,7 @@ namespace VVVOnTheWay
             {
                 _userIcon = new MapIcon()
                 {
+                    Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/guy.png")),
                     Title = "Your Location",
                     Location = geoposition.Coordinate.Point
                 };
