@@ -37,10 +37,12 @@ namespace VVVOnTheWay
         private MapIcon _userIcon;
         private MapRouteView _routeView;
         private Language _language = VVVOnTheWay.Language.ENGLISH;
+        private Dictionary<PointOfInterest, MapIcon> _routeIcons = new Dictionary<PointOfInterest, MapIcon>();
 
         public MapPage()
         {
             this.InitializeComponent();
+            
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -126,11 +128,18 @@ namespace VVVOnTheWay
                             PointOfInterest poi = ((PointOfInterest)interest);
                             NotificationSystem.NotificationSystem.SenToastificationAsync(poi.GetNotification());
                             NotificationSystem.NotificationSystem.SendVibrationNotificationAsync();
+
                         }
                         interest.IsVisited = true;
                         ListenToNextPointOfInterest();
                         ShowNewRoute((await BingMapsWrapper.GetCurrentPosition()));
                         FileIO.RouteProgressIO.SaveRouteProgressToFile(route);
+
+                        //@TODO plaats dit op een nieuwe task of betere locatie
+                        var icon = _routeIcons[(PointOfInterest)point];
+                        if (icon == null) return;
+                        icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Point visited.png"));
+
                     });
                     return;
                 }), point);
@@ -181,14 +190,15 @@ namespace VVVOnTheWay
                 PointOfInterest point = poi as PointOfInterest;
                 if (point != null)
                 {
-                    Map.MapElements.Add(new MapIcon()
+                    MapIcon icon = new MapIcon()
                     {
                         Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Point.png")),
                         Title = point.Title[(int) _language],
                         Location = poi.Location
 
-                    });
-                    
+                    };
+                    Map.MapElements.Add(icon);
+                    _routeIcons.Add(point, icon);
                 }
             }
         }
