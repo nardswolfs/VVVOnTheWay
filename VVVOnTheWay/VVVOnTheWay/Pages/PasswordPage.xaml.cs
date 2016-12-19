@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -44,6 +45,14 @@ namespace VVVOnTheWay
             {
                 PasswordError.Opacity = 1.0;
                 PasswordWrongAnimation.Begin();
+            }
+        }
+
+        private void PasswordBox_OnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                LoginButton_Click(sender, e);
             }
         }
     }

@@ -31,11 +31,7 @@ namespace VVVOnTheWay
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DutchButton.BorderBrush == new SolidColorBrush(Colors.Black))
-            {
-                //choose Dutch language
-            }
-            //choose English language
+            Settings.Language = DutchButton.BorderBrush == new SolidColorBrush(Colors.Black) ? VVVOnTheWay.Language.DUTCH : VVVOnTheWay.Language.ENGLISH;
             LanguageSelectionFrame.Navigate(typeof(MapPage));
         }
 

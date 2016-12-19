@@ -33,7 +33,7 @@ namespace VVVOnTheWay
         {
             if (HistoricalKmButton.BorderBrush == new SolidColorBrush(Colors.Black))
             {
-                //choose historical km route
+                //choose histarical km route
             } 
             //choose blind walls route
             RouteSelectionFrame.Navigate(typeof(LanguageSelectionPage));
