@@ -143,9 +143,12 @@ namespace VVVOnTheWay
                         FileIO.RouteProgressIO.SaveRouteProgressToFile(route);
 
                         //@TODO plaats dit op een nieuwe task of betere locatie
-                        var icon = _routeIcons[(PointOfInterest)point];
-                        if (icon == null) return;
-                        icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Point visited.png"));
+                        if (point is PointOfInterest)
+                        {
+                            var icon = _routeIcons[(PointOfInterest)point];
+                            if (icon == null) return;
+                            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Point visited.png"));
+                        }
 
                     });
                     return;
