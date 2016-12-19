@@ -45,7 +45,7 @@ namespace VVVOnTheWay
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             route = e.Parameter as Route.Route;
-            BingMapsWrapper.ClearGeofences();
+            LocationSystem.BingMapsWrapper.ClearGeofences();
             await GetUserLocation();
             AddPointsOfInterest();
         }
@@ -54,7 +54,7 @@ namespace VVVOnTheWay
         {
             try
             {
-                var location = await BingMapsWrapper.GetCurrentPosition();
+                var location = await LocationSystem.BingMapsWrapper.GetCurrentPosition();
                 Map.Center = location.Coordinate.Point;
                 Map.ZoomLevel = 15;
                 UpdateUserLocation(location);
@@ -95,7 +95,12 @@ namespace VVVOnTheWay
                 if (nextPoint is PointOfInterest)
                     break;
             }
-            if (points.Count <= 1) return;
+            if (points.Count <= 1)
+            {
+                if (_routeView != null)
+                    Map.Routes.Remove(_routeView);
+                return;
+            }
             var routeResult = await BingMapsWrapper.GetRouteBetween(points);
             if (routeResult == null) return;
             if (_routeView != null)
@@ -116,23 +121,30 @@ namespace VVVOnTheWay
             {
                 await BingMapsWrapper.PointOfInterestEntered((async interest =>
                 {
-                    await Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, async () =>
+                    await Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         if (interest.IsVisited) return;
-                        // TODO SHOW NOTIFICATION THAT POINT OF INTEREST IS REACHED
                         if (interest.GetType() == typeof(PointOfInterest))
                         {
-                            PointOfInterest poi = ((PointOfInterest)interest);
+                            PointOfInterest poi = ((PointOfInterest) interest);
                             NotificationSystem.NotificationSystem.SenToastificationAsync(poi.GetNotification());
                             NotificationSystem.NotificationSystem.SendVibrationNotificationAsync();
+                            var g = new PointDataPage(poi);
+                            await g.ShowAsync();
+
                         }
                         interest.IsVisited = true;
                         ListenToNextPointOfInterest();
-                        ShowNewRoute((await BingMapsWrapper.GetCurrentPosition()));
+                        //ShowNewRoute((await BingMapsWrapper.GetCurrentPosition())); TODO CHECK IF NEEDED
                         FileIO.RouteProgressIO.SaveRouteProgressToFile(route);
                     });
                     return;
                 }), point);
+            }
+            else
+            {
+                // TODO SHOW NOTIFICATION ROUTE FINISHED
+                // TODO REMOVE ROUTE PROGRESS
             }
         }
 
