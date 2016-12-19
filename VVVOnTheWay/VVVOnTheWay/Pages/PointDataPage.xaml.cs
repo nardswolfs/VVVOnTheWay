@@ -26,6 +26,7 @@ namespace VVVOnTheWay.Pages
 
         public PointDataPage(string[] poiTitle, string[] poiDescription, string poiImagePath, string[] poiAudioPath)
         {
+            this.InitializeComponent();
             if (Settings.Language == VVVOnTheWay.Language.ENGLISH)
             {
                 PointInfoText.Text = poiTitle[1] + "\n\n" + poiDescription[1];
