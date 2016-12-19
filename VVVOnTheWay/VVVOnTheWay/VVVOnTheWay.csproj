@@ -91,6 +91,7 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\guy.png" />
     <Content Include="Assets\HistoricalKilometerFullRoute.json" />
+    <Content Include="Assets\BlindWallsFullRoute.json" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
