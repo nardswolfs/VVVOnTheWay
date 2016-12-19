@@ -76,7 +76,5 @@ namespace VVVOnTheWay
             Settings.Language = VVVOnTheWay.Language.DUTCH;
             SetColors();
         }
-
-        
     }
 }
