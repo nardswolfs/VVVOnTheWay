@@ -125,12 +125,12 @@ namespace VVVOnTheWay
             {
                 await BingMapsWrapper.PointOfInterestEntered((async interest =>
                 {
-                    await Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, async () =>
+                    await Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         if (interest.IsVisited) return;
                         if (interest.GetType() == typeof(PointOfInterest))
                         {
-                            PointOfInterest poi = ((PointOfInterest)interest);
+                            PointOfInterest poi = ((PointOfInterest) interest);
                             NotificationSystem.NotificationSystem.SenToastificationAsync(poi.GetNotification());
                             NotificationSystem.NotificationSystem.SendVibrationNotificationAsync();
                             var g = new PointDataPage(poi);
@@ -157,6 +157,7 @@ namespace VVVOnTheWay
             else
             {
                 // TODO SHOW NOTIFICATION ROUTE FINISHED
+
                 // TODO OK BART
                 switch (Settings.Language)
                 {
