@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using VVVOnTheWay.NotificationSystem;
 using VVVOnTheWay.Pages;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -24,6 +25,8 @@ namespace VVVOnTheWay
     /// </summary>
     public sealed partial class LanguageSelectionPage : Page
     {
+        private Route.Route route;
+
         public LanguageSelectionPage()
         {
             this.InitializeComponent();
@@ -31,13 +34,19 @@ namespace VVVOnTheWay
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            LanguageSelectionFrame.Navigate(typeof(MapPage));
+            LanguageSelectionFrame.Navigate(typeof(MapPage), route);
         }
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            var g = new GuidePage();
-            await g.ShowAsync();
+            NotificationSystemTestDriver.TestRun();
+            //var g = new GuidePage();
+            //await g.ShowAsync();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            route = e.Parameter as Route.Route;
         }
 
         private void SetColors()
