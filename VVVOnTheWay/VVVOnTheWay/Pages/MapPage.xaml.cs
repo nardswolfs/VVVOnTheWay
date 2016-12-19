@@ -125,6 +125,9 @@ namespace VVVOnTheWay
                             PointOfInterest poi = ((PointOfInterest)interest);
                             NotificationSystem.NotificationSystem.SenToastificationAsync(poi.GetNotification());
                             NotificationSystem.NotificationSystem.SendVibrationNotificationAsync();
+                            var g = new PointDataPage(poi.Title, poi.Description, poi.ImagePath, poi.AudioPath);
+                            await g.ShowAsync();
+
                         }
                         interest.IsVisited = true;
                         ListenToNextPointOfInterest();
