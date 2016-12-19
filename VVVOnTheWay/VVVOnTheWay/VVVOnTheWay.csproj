@@ -89,8 +89,8 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Content Include="Assets\HistoricalKilometerFullRoute.json" />
-    <Content Include="Assets\BlindWallsFullRoute.json" />
+    <Content Include="Assets\HistoricalKilometerRoute.json" />
+    <Content Include="Assets\BlindwallsRoute.json" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>

@@ -38,10 +38,10 @@ namespace VVVOnTheWay.FileIO
             }
             catch (FileNotFoundException)
             {
-                historicalKilometerFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Assets\HistoricalKilometerFullRoute.json");
-                await historicalKilometerFile.CopyAsync(datafolder, $"{HistoricalKilometerFileName}.json", NameCollisionOption.ReplaceExisting);
+                return await loadRouteFromAssets(HistoricalKilometerFileName);
             }
             string json = await Windows.Storage.FileIO.ReadTextAsync(historicalKilometerFile);
+            if (json == "") return await loadRouteFromAssets(HistoricalKilometerFileName);
             Route.Route retrievedRoute = JsonConvert.DeserializeObject<Route.Route>(json, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
             return retrievedRoute;
         }
@@ -60,10 +60,20 @@ namespace VVVOnTheWay.FileIO
             }
             catch (FileNotFoundException)
             {
-                blindWallsRoute = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Assets\BlindWallsFullRoute.json");
-                await blindWallsRoute.CopyAsync(datafolder, $"{BlindWallsFileName}.json", NameCollisionOption.ReplaceExisting);
+                return await loadRouteFromAssets(BlindWallsFileName);
             }
             string json = await Windows.Storage.FileIO.ReadTextAsync(blindWallsRoute);
+            if (json == "") return await loadRouteFromAssets(BlindWallsFileName);
+            Route.Route retrievedRoute = JsonConvert.DeserializeObject<Route.Route>(json, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+            return retrievedRoute;
+        }
+
+        private static async Task<Route.Route> loadRouteFromAssets(string routeFileName)
+        {
+            StorageFolder datafolder = ApplicationData.Current.LocalFolder;
+            StorageFile routeFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync($@"Assets\{routeFileName}.json");
+            await routeFile.CopyAsync(datafolder, $"{routeFileName}.json", NameCollisionOption.ReplaceExisting);
+            string json = await Windows.Storage.FileIO.ReadTextAsync(routeFile);
             Route.Route retrievedRoute = JsonConvert.DeserializeObject<Route.Route>(json, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
             return retrievedRoute;
         }
