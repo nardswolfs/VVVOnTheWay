@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LocationSystem;
+using VVVOnTheWay.NotificationSystem;
 using VVVOnTheWay.Pages;
 using VVVOnTheWay.Route;
 using Point = VVVOnTheWay.Route.Point;
@@ -144,6 +145,18 @@ namespace VVVOnTheWay
             else
             {
                 // TODO SHOW NOTIFICATION ROUTE FINISHED
+                // TODO OK BART
+                switch (Settings.Language)
+                {
+                    case VVVOnTheWay.Language.ENGLISH:
+                        NotificationSystem.NotificationSystem.SenToastificationAsync(
+                        new Notification("End of the route.", "You have reached the end of the route. You can turn in your phone to the VVV employee."));
+                        break;
+                    case VVVOnTheWay.Language.DUTCH:
+                        NotificationSystem.NotificationSystem.SenToastificationAsync(
+                        new Notification("Einde van de route.", "U heeft de route afgerond. U kan nu de telefoon inleveren bij de VVV medewerker."));
+                        break;
+                }
                 // TODO REMOVE ROUTE PROGRESS
             }
         }
