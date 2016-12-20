@@ -40,10 +40,26 @@ namespace VVVOnTheWay
         private Language _language = VVVOnTheWay.Language.ENGLISH;
         private Dictionary<PointOfInterest, MapIcon> _routeIcons = new Dictionary<PointOfInterest, MapIcon>();
 
+
         public MapPage()
         {
             this.InitializeComponent();
+            SetText();
             
+        }
+
+        //TODO TextBlock.text += distance
+        private void SetText()
+        {
+            if(_language == VVVOnTheWay.Language.DUTCH)
+            {
+                textBlock.Text = "Afstand tot volgend punt = ";
+            }
+            if(_language == VVVOnTheWay.Language.ENGLISH)
+            {
+                textBlock.Text = "Distance to next point = ";
+            }
+           
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -70,7 +86,7 @@ namespace VVVOnTheWay
                 // TODO take action when no gps
                 // TODO show in language which is chosen
             }
-            
+
             BingMapsWrapper.NotifyOnLocationUpdate((async geoposition =>
             {
                 await Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, () =>
@@ -79,19 +95,19 @@ namespace VVVOnTheWay
                      ShowNewRoute(geoposition);
                  });
             }));
-            
+
             ListenToNextPointOfInterest();
-            
+
 
         }
 
         private async void ShowNewRoute(Geoposition position)
         {
             List<Point> routepoints = new List<Point>();
-            List<Geopoint> points = new List<Geopoint>() { position.Coordinate.Point};
+            List<Geopoint> points = new List<Geopoint>() { position.Coordinate.Point };
             while (true)
             {
-                var nextPoint = GetNextPointOfInterest(false,routepoints);
+                var nextPoint = GetNextPointOfInterest(false, routepoints);
                 if (nextPoint == null) break;
                 points.Add(nextPoint.Location);
                 routepoints.Add(nextPoint);
@@ -124,32 +140,32 @@ namespace VVVOnTheWay
             {
                 await BingMapsWrapper.PointOfInterestEntered((async interest =>
                 {
-                    await Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal,async () =>
-                    {
-                        if (interest.IsVisited) return;
-                        if (interest.GetType() == typeof(PointOfInterest))
-                        {
-                            PointOfInterest poi = ((PointOfInterest) interest);
-                            NotificationSystem.NotificationSystem.SenToastificationAsync(poi.GetNotification());
-                            NotificationSystem.NotificationSystem.SendVibrationNotificationAsync();
-                            var g = new PointDataPage(poi);
-                            await g.ShowAsync();
+                    await Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, async () =>
+                     {
+                         if (interest.IsVisited) return;
+                         if (interest.GetType() == typeof(PointOfInterest))
+                         {
+                             PointOfInterest poi = ((PointOfInterest)interest);
+                             NotificationSystem.NotificationSystem.SenToastificationAsync(poi.GetNotification());
+                             NotificationSystem.NotificationSystem.SendVibrationNotificationAsync();
+                             var g = new PointDataPage(poi);
+                             await g.ShowAsync();
 
-                        }
-                        interest.IsVisited = true;
-                        ListenToNextPointOfInterest();
-                        ShowNewRoute((await BingMapsWrapper.GetCurrentPosition())); 
-                        FileIO.RouteProgressIO.SaveRouteProgressToFile(route);
+                         }
+                         interest.IsVisited = true;
+                         ListenToNextPointOfInterest();
+                         ShowNewRoute((await BingMapsWrapper.GetCurrentPosition()));
+                         FileIO.RouteProgressIO.SaveRouteProgressToFile(route);
 
-                        //@TODO plaats dit op een nieuwe task of betere locatie
+                        //@TODO PLACE ON BETER LOCATION OR ON NEW TASK
                         if (point is PointOfInterest)
-                        {
-                            var icon = _routeIcons[(PointOfInterest)point];
-                            if (icon == null) return;
-                            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Point visited.png"));
-                        }
+                         {
+                             var icon = _routeIcons[(PointOfInterest)point];
+                             if (icon == null) return;
+                             icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Point visited.png"));
+                         }
 
-                    });
+                     });
                     return;
                 }), point);
             }
@@ -175,14 +191,14 @@ namespace VVVOnTheWay
 
         private Route.Point GetNextPointOfInterest(bool pointOfInterest = false, List<Point> skip = null)
         {
-            if(skip == null)
+            if (skip == null)
                 skip = new List<Point>();
             var reversed = new List<Point>(route.RoutePoints);
             reversed.Reverse();
             var index = reversed.FindIndex((point) => point.IsVisited);
             if (index == -1)
                 index = route.RoutePoints.Count;
-            for (var i = route.RoutePoints.Count-index; i < route.RoutePoints.Count; i++)
+            for (var i = route.RoutePoints.Count - index; i < route.RoutePoints.Count; i++)
             {
                 var point = route.RoutePoints.ElementAt(i);
                 if (!point.IsVisited && (point is PointOfInterest == pointOfInterest || !pointOfInterest) && !skip.Contains(point))
@@ -209,7 +225,7 @@ namespace VVVOnTheWay
             }
         }
 
-      
+
         private void AddPointsOfInterest()
         {
             foreach (var poi in route.RoutePoints)
@@ -220,7 +236,7 @@ namespace VVVOnTheWay
                     MapIcon icon = new MapIcon()
                     {
                         Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Point.png")),
-                        Title = point.Title[(int) _language],
+                        Title = point.Title[(int)_language],
                         Location = poi.Location
 
                     };
@@ -243,5 +259,7 @@ namespace VVVOnTheWay
         }
 
        
+
+
     }
 }

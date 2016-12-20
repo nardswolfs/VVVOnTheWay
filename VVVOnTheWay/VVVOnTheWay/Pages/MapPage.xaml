@@ -39,5 +39,8 @@
                 <Image Source="..\Assets/settings.png" Stretch="Uniform"/>
             </Button>
         </Grid>
+        <StackPanel HorizontalAlignment="Center" Height="50" VerticalAlignment="Top" Width="200" >
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text=""/>
+        </StackPanel>
     </Grid>
 </Page>
