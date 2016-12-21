@@ -45,8 +45,6 @@ namespace VVVOnTheWay
         public MapPage()
         {
             this.InitializeComponent();
-            
-
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -85,8 +83,6 @@ namespace VVVOnTheWay
             }));
             
             ListenToNextPointOfInterest();
-            
-
         }
 
         private async void ShowNewRoute(Geoposition position)
