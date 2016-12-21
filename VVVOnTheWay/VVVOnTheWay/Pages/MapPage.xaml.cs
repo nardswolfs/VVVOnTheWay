@@ -41,7 +41,7 @@ namespace VVVOnTheWay
         private Language _language = VVVOnTheWay.Language.ENGLISH;
         private Dictionary<PointOfInterest, MapIcon> _routeIcons = new Dictionary<PointOfInterest, MapIcon>();
 
-        private MapPolyline _mapPolyline;\
+        private MapPolyline _mapPolyline;
 
         public MapPage()
         {
@@ -243,10 +243,10 @@ namespace VVVOnTheWay
             }
             if (_userIcon == null)
             {
-                _userIcon = new MapIcon()
+                _userIcon = new MapIcon
                 {
                     Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/guy.png")),
-                    Title = "Your Location",
+                    Title = Settings.Language == VVVOnTheWay.Language.ENGLISH ? "Your Location" : "Uw locatie",
                     Location = geoposition.Coordinate.Point
                 };
                 Map.MapElements.Add(_userIcon);
