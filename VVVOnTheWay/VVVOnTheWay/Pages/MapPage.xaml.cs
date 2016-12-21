@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Appointments;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -222,7 +223,6 @@ namespace VVVOnTheWay
                         Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Point.png")),
                         Title = point.Title[(int) _language],
                         Location = poi.Location
-
                     };
                     Map.MapElements.Add(icon);
                     _routeIcons.Add(point, icon);
@@ -238,10 +238,20 @@ namespace VVVOnTheWay
 
         private async void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
+            var languageBefore = (int)Settings.Language;
             var g = new SettingsPage();
             await g.ShowAsync();
+            ChangeLanguage(languageBefore);
         }
 
-       
+        private void ChangeLanguage(int languageBefore)
+        {
+            var languageAfter = (int) Settings.Language;
+            if(languageAfter == languageBefore) return;
+            foreach (var pair in _routeIcons)
+            {
+                pair.Value.Title = pair.Key.Title[languageAfter];
+            }
+        }
     }
 }

@@ -41,10 +41,10 @@ namespace VVVOnTheWay.FileIO
             catch (FileNotFoundException)
             {
 
-                return await loadRouteFromAssetsAsync(routeFileName);
+                return await LoadRouteFromAssetsAsync(routeFileName);
             }
             string json = await Windows.Storage.FileIO.ReadTextAsync(routeFile);
-            if (json == "") return await loadRouteFromAssetsAsync(routeFileName);
+            if (json == "") return await LoadRouteFromAssetsAsync(routeFileName);
             Route.Route retrievedRoute = JsonConvert.DeserializeObject<Route.Route>(json, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
             return retrievedRoute;
         }
