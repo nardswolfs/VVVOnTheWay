@@ -66,20 +66,15 @@ namespace VVVOnTheWay
             }
         }
 
-        private void LanguageSelected(string language)
-        {
-            Settings.Language = language == "English" ? VVVOnTheWay.Language.ENGLISH : VVVOnTheWay.Language.DUTCH;
-        }
-
         private void EnglishButton_Click(object sender, RoutedEventArgs e)
         {
-            LanguageSelected("English");
+            Settings.Language = VVVOnTheWay.Language.ENGLISH;
             SetColors();
         }
 
         private void DutchButton_Click(object sender, RoutedEventArgs e)
         {
-            LanguageSelected("Dutch");
+            Settings.Language = VVVOnTheWay.Language.DUTCH;
             SetColors();
         }
     }
