@@ -44,7 +44,7 @@ namespace VVVOnTheWay
         public MapPage()
         {
             this.InitializeComponent();
-            SetText();
+            
             Map.MapElementClick += Map_MapElementClick;
             
         }
