@@ -130,7 +130,8 @@ namespace VVVOnTheWay
             if (_routeView != null)
                 Map.Routes.Remove(_routeView);
             double distance = routeResult.LengthInMeters;
-            textBlock2.Text = distance + " m";
+            if(distance >= 1000.0) { textBlock2.Text = Math.Round(distance / 1000.0) + " km"; }
+            else { textBlock2.Text = distance + " m"; }
             //@TODO textblock1 check lang 
             _routeView = new MapRouteView(routeResult)
             {
