@@ -132,6 +132,7 @@ namespace VVVOnTheWay
                             PointOfInterest poi = ((PointOfInterest) interest);
                             NotificationSystem.NotificationSystem.SenToastificationAsync(poi.GetNotification());
                             NotificationSystem.NotificationSystem.SendVibrationNotificationAsync();
+                            if (poi.Description == null) poi.Description = new []{"No description", "Geen beschrijving"};
                             var g = new PointDataPage(poi);
                             await g.ShowAsync();
 

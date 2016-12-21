@@ -52,6 +52,7 @@ namespace VVVOnTheWay.Pages
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
+            Hide();
             var g = new GuidePage();
             await g.ShowAsync();
         }
