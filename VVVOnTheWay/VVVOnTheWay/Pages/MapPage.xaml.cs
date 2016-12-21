@@ -39,28 +39,39 @@ namespace VVVOnTheWay
         private MapRouteView _routeView;
         private Language _language = VVVOnTheWay.Language.ENGLISH;
         private Dictionary<PointOfInterest, MapIcon> _routeIcons = new Dictionary<PointOfInterest, MapIcon>();
-
+     
 
         public MapPage()
         {
             this.InitializeComponent();
             SetText();
+            Map.MapElementClick += Map_MapElementClick;
             
         }
 
-        //TODO TextBlock.text += distance
-        private void SetText()
+        private async void Map_MapElementClick(MapControl sender, MapElementClickEventArgs args)
         {
-            if(_language == VVVOnTheWay.Language.DUTCH)
-            {
-                textBlock.Text = "Afstand tot volgend punt = ";
-            }
-            if(_language == VVVOnTheWay.Language.ENGLISH)
-            {
-                textBlock.Text = "Distance to next point = ";
-            }
-           
+            MapIcon clickedIcon = args.MapElements.FirstOrDefault(x => x is MapIcon) as MapIcon;
+            PointOfInterest poi = _routeIcons.FirstOrDefault(x => x.Value == clickedIcon).Key;
+            var g = new PointDataPage(poi);
+            await g.ShowAsync();
         }
+
+
+
+        //TODO TextBlock.text += distance
+        //private void SetText()
+        //{
+        //    if(_language == VVVOnTheWay.Language.DUTCH)
+        //    {
+        //        textBlock.Text = "Afstand tot volgend punt = ";
+        //    }
+        //    if(_language == VVVOnTheWay.Language.ENGLISH)
+        //    {
+        //        textBlock.Text = "Distance to next point = ";
+        //    }
+           
+        //}
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
