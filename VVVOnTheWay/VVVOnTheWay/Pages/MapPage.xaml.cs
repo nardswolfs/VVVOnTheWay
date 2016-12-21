@@ -261,19 +261,19 @@ namespace VVVOnTheWay
 
         private async void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            var languageBefore = (int)Settings.Language;
+            var languageBefore = Settings.Language;
             var g = new SettingsPage();
             await g.ShowAsync();
             ChangeLanguage(languageBefore);
         }
 
-        private void ChangeLanguage(int languageBefore)
+        private void ChangeLanguage(Language languageBefore)
         {
-            var languageAfter = (int) Settings.Language;
+            var languageAfter = Settings.Language;
             if(languageAfter == languageBefore) return;
             foreach (var pair in _routeIcons)
             {
-                pair.Value.Title = pair.Key.Title[languageAfter];
+                pair.Value.Title = pair.Key.Title[(int)languageAfter];
             }
         }
     }
