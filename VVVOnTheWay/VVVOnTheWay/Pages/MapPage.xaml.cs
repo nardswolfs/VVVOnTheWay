@@ -39,14 +39,14 @@ namespace VVVOnTheWay
         private MapRouteView _routeView;
         private Language _language = VVVOnTheWay.Language.ENGLISH;
         private Dictionary<PointOfInterest, MapIcon> _routeIcons = new Dictionary<PointOfInterest, MapIcon>();
-     
+        
 
         public MapPage()
         {
             this.InitializeComponent();
-            
             Map.MapElementClick += Map_MapElementClick;
-            
+
+           
         }
 
         private async void Map_MapElementClick(MapControl sender, MapElementClickEventArgs args)
@@ -57,21 +57,10 @@ namespace VVVOnTheWay
             await g.ShowAsync();
         }
 
+        
 
 
-        //TODO TextBlock.text += distance
-        //private void SetText()
-        //{
-        //    if(_language == VVVOnTheWay.Language.DUTCH)
-        //    {
-        //        textBlock.Text = "Afstand tot volgend punt = ";
-        //    }
-        //    if(_language == VVVOnTheWay.Language.ENGLISH)
-        //    {
-        //        textBlock.Text = "Distance to next point = ";
-        //    }
-           
-        //}
+       
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -80,6 +69,7 @@ namespace VVVOnTheWay
             await GetUserLocation();
             AddPointsOfInterest();
         }
+       
 
         private async Task GetUserLocation()
         {
@@ -112,6 +102,10 @@ namespace VVVOnTheWay
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
         private async void ShowNewRoute(Geoposition position)
         {
             List<Point> routepoints = new List<Point>();
@@ -135,7 +129,9 @@ namespace VVVOnTheWay
             if (routeResult == null) return;
             if (_routeView != null)
                 Map.Routes.Remove(_routeView);
-
+            double distance = routeResult.LengthInMeters;
+            textBlock2.Text = distance + " m";
+            //@TODO textblock1 check lang 
             _routeView = new MapRouteView(routeResult)
             {
                 OutlineColor = Colors.Black,

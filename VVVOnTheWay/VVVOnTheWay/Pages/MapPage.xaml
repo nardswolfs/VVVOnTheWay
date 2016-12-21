@@ -40,7 +40,8 @@
             </Button>
         </Grid>
         <StackPanel HorizontalAlignment="Center" Height="50" VerticalAlignment="Top" Width="200" >
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text=""/>
+            <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text=""/>
+            <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text=""/>
         </StackPanel>
     </Grid>
 </Page>
