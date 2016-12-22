@@ -83,13 +83,13 @@ namespace VVVOnTheWay.Route
                      "Hier links zie je een rood poortje. Op de stenen poort zijn schapenkoppen en het wapen van Breda te zien. Achter de deuren van het poortje ligt een steeg die naar de achterkant van de Grote Markt leidt. Vroeger diende dit poortje als achteruitgang van de Vleeshal die zich op de Grote Markt bevond. Het poortje is in 1614 gemaakt door steenhouwer Melchior van Herbach. Tot 1995 was het Breda's Museum in dit pand bevestigd. "
                 },
                 false,
-                null, "http://upload.wikimedia.org/wikipedia/commons/4/42/RM10234_Breda_-_Karrestraat_bij_7.jpg",
+                null, "RM10234_Breda_-_Karrestraat_bij_7.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5881950, Longitude = 4.7751383})));
 
             PointsOfInterest.Add(new PointOfInterest(new[] {"Ridderstraat", "Ridderstraat"}, 
                 new[] {  "Ridderstraat mall entrance near the Baroness in Breda Centre", "Ridderstraat nabij ingang winkelcentrum de Barones in Breda Centrum" },
                 false,
-                null, "https://upload.wikimedia.org/wikipedia/commons/e/eb/Ridderstraat_Breda_Centrum_DSCF2871.JPG",
+                null, "Ridderstraat_Breda_Centrum_DSCF2871.JPG",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5870833, Longitude = 4.7757500})));
 
             PointsOfInterest.Add(new PointOfInterest(new[] {"Large Market", "Grote Markt" },
@@ -100,7 +100,7 @@ namespace VVVOnTheWay.Route
 
                  },
                 false,
-                null, "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Grote_Markt_Breda_DSCF2843.JPG/800px-Grote_Markt_Breda_DSCF2843.JPG",
+                null, "800px-Grote_Markt_Breda_DSCF2843.JPG",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5874167, Longitude = 4.7765550})));
 
             PointsOfInterest.Add(new PointOfInterest(new[] { "liberation Monument", "Bevrijdingsmonument" },
@@ -110,7 +110,7 @@ namespace VVVOnTheWay.Route
                     "Het monument staat op de kruising van de claudius prinsenlaan en de wilhelminasingel. Tekst op het monument: Uit dank voor bevrijding 1944 gebouwd in mariajaar 1954"
                 },
                 false,
-                null, "https://nl.tracesofwar.com/upload/1378100430130014.jpg",
+                null, "1378100430130014.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5880283, Longitude = 4.7763333})));
 
             PointsOfInterest.Add(new PointOfInterest(new[] { "Breda city hall", "Stadshuis" }, 
@@ -118,7 +118,7 @@ namespace VVVOnTheWay.Route
                     "Het stadhuis van Breda staat op de Grote Markt in het centrum van Breda. Dit historische gebouw heeft een trap aan de voorkant. Hier vinden trouwerijen van de Bredase burgers plaats en ook officiële ontvangsten van het College van burgemeester en wethouders van Breda. Het stadhuis heeft een stenen bordestrap met op de balustrade, leeuwen die de wapens van Breda en Brabant dragen. "
                 },
                 false,
-                null, "https://www.breda.nl/data/files/imagecache/eigen_keuze/450px-p1030219oude_stadhuis_breda.jpg",
+                null, "450px-p1030219oude_stadhuis_breda.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5887500, Longitude = 4.7761117})));
 
             PointsOfInterest.Add(
@@ -133,28 +133,32 @@ namespace VVVOnTheWay.Route
                     "De Sint-Antoniuskathedraal (ook Sint-Antoniuskerk genoemd) is de kathedrale kerk van het bisdom Breda in de Sint-Jansstraat in Breda. De kathedraal is gewijd aan de heilige Antonius van Padua. De kathedraal bevindt zich in het centrum van Breda niet ver van de Grote Markt.\r\n"
                 },
                 false,
-                null, "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/P1000965copySint-Antoniuskathedraal.jpg/266px-P1000965copySint-Antoniuskathedraal.jpg",
+                null, "266px-P1000965copySint-Antoniuskathedraal.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5876383, Longitude = 4.77725})));
 
             PointsOfInterest.Add(
                 new Point(new Geopoint(new BasicGeoposition {Latitude = 51.5882783, Longitude = 4.7785})));
 
-            PointsOfInterest.Add(new PointOfInterest(new[] {"Library", "Bibliotheek"}, new[] {"", ""},
+            PointsOfInterest.Add(new PointOfInterest(new[] {"Library", "Bibliotheek"}, 
+                new[] {"New Veste, Center for the Arts, a center for various art forms located on the Molenstraat 6 in the city of Breda in the district Breda Centre. In the New Veste are four main directions in art: music, art, theater and dance. There is a lot of collaboration with the city of Breda schools. The cooperation ranges from excursions to customization.",
+                    "De Nieuwe Veste, Centrum voor de Kunsten, is een centrum voor diverse kunstvormen gelegen aan de Molenstraat 6 in de binnenstad van Breda in het stadsdeel Breda Centrum. In de Nieuwe Veste staan vier kunstrichtingen centraal: muziek, beeldende kunst, theater en dans. Er vindt veel samenwerking plaats met de Bredase scholen. De samenwerking varieert van excursies tot maatwerk." },
                 false,
-                new[] {"null", "null"}, null,
+                null, "Breda_Bibliotheek.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.588, Longitude = 4.778945})));
 
             PointsOfInterest.Add(
                 new Point(new Geopoint(new BasicGeoposition {Latitude = 51.5873617, Longitude = 4.7802217})));
 
-            PointsOfInterest.Add(new PointOfInterest(new[] {"Kloosterkazerne", "Kloosterkazerne"}, new[] {"", ""},
+            PointsOfInterest.Add(new PointOfInterest(new[] {"Kloosterkazerne", "Kloosterkazerne"}, new[] {"The Kloosterkazerne is a building in Breda to the Monastery Square and Claudius Prinsenlaan in the center of Breda. It is close to the district Chassé Park. It was originally part of a convent built by the Norbertinessenconvent St. Catharinadal.",
+                "De Kloosterkazerne is een bouwwerk in Breda aan het Kloosterplein en de Claudius Prinsenlaan in het centrum van Breda. Het ligt dicht bij de wijk Chassé Park. Het maakte oorspronkelijk deel uit van een nonnenklooster gebouwd in opdracht van het Norbertinessenconvent Sint-Catharinadal." },
                 false,
-                new[] {"null", "null"}, null,
+                null, "266px-Breda_kloosterkazerne.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5877217, Longitude = 4.7810283})));
 
-            PointsOfInterest.Add(new PointOfInterest(new[] {"Chasse theater", "Chasse theater"}, new[] {"", ""},
+            PointsOfInterest.Add(new PointOfInterest(new[] {"Chasse theater", "Chasse theater"}, new[] {"Chassé Theater is a large theater in the city of Breda, next to the old Kloosterkazerne. The theater is named after the army officer David Hendrik Chassé. It is housed in a modern building with a striking undulating roof to a design by Herman Hertzberger, dating back to 1995. The theater consists of three theaters and three cinemas with a total of 2500 seats.\r\n\r\nPrecursor of the Chassé Theater was the theater Concordia.",
+                "Het Chassé Theater is a groot theater in de binnenstad van Breda, naast de oude Kloosterkazerne. Het theater is vernoemd naar de legerofficier David Hendrik Chassé. Het is gehuisvest in Een modern gebouw met Een opvallend golvend dak Naar een Ontwerp van Herman Hertzberger, Dat uit 1995 dateert. Het theater is also uit three Theater- en three filmzalen voldaan Totaal ruim 2500 zitplaatsen.Voorloper Van het Chassé Theater was de Stadsschouwburg Concordia." },
                 false,
-                new[] { "null", "null" }, null,
+                null, "P1010936Chasse_theater.jpg",
                 new Geopoint(new BasicGeoposition { Latitude = 51.58775, Longitude = 4.782 })));
 
 
