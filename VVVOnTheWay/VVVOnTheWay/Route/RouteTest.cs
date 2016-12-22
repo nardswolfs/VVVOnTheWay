@@ -158,7 +158,7 @@ namespace VVVOnTheWay.Route
             PointsOfInterest.Add(new PointOfInterest(new[] {"Chasse theater", "Chasse theater"}, new[] {"Chassé Theater is a large theater in the city of Breda, next to the old Kloosterkazerne. The theater is named after the army officer David Hendrik Chassé. It is housed in a modern building with a striking undulating roof to a design by Herman Hertzberger, dating back to 1995. The theater consists of three theaters and three cinemas with a total of 2500 seats.\r\n\r\nPrecursor of the Chassé Theater was the theater Concordia.",
                 "Het Chassé Theater is a groot theater in de binnenstad van Breda, naast de oude Kloosterkazerne. Het theater is vernoemd naar de legerofficier David Hendrik Chassé. Het is gehuisvest in Een modern gebouw met Een opvallend golvend dak Naar een Ontwerp van Herman Hertzberger, Dat uit 1995 dateert. Het theater is also uit three Theater- en three filmzalen voldaan Totaal ruim 2500 zitplaatsen.Voorloper Van het Chassé Theater was de Stadsschouwburg Concordia." },
                 false,
-                null, "P1010936Chasse_theater.jpg",
+                null, "P1010936Chasse_theater.JPG",
                 new Geopoint(new BasicGeoposition { Latitude = 51.58775, Longitude = 4.782 })));
 
 
