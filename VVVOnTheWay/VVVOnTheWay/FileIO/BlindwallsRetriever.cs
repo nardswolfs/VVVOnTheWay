@@ -1,20 +1,23 @@
-﻿using System;
+﻿// Created by Bart Machielsen
+
+#region
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Newtonsoft.Json;
 using VVVOnTheWay.Route;
 
+#endregion
+
 namespace VVVOnTheWay.FileIO
 {
-    class BlindwallsRetriever
+    internal class BlindwallsRetriever
     {
-        private HttpClient http;
+        private readonly HttpClient http;
 
         public BlindwallsRetriever()
         {
@@ -31,6 +34,7 @@ namespace VVVOnTheWay.FileIO
             foreach (var post in data.posts)
             {
                 string title = post.title.ToString();
+                string slug = post.slug.ToString();
                 var customFields = post.custom_fields;
                 string location = customFields.blokken_2_kaart_rechts[0].ToString();
                 string description;
@@ -42,14 +46,18 @@ namespace VVVOnTheWay.FileIO
                 {
                     description = "MISSING";
                 }
-                   
+
                 location = Regex.Replace(location, "[:;]", "");
                 var stringarray = Regex.Split(location, "\"");
                 var latitude = stringarray[7];
                 var longitude = stringarray[11];
-                poiList.Add(new PointOfInterest(new[] { title, title }, new[] { description, description}, false,
-                new[] { "null", "null" }, null,
-                new Geopoint(new BasicGeoposition { Latitude = Convert.ToDouble(latitude), Longitude = Convert.ToDouble(longitude) })));
+                poiList.Add(new PointOfInterest(new[] {title, title}, new[] {description, description}, false,
+                    new[] {"null", "null"}, @"Assets\BlindWalls\" + slug + ".jpg",
+                    new Geopoint(new BasicGeoposition
+                    {
+                        Latitude = Convert.ToDouble(latitude),
+                        Longitude = Convert.ToDouble(longitude)
+                    })));
             }
             return new Route.Route(poiList);
         }
