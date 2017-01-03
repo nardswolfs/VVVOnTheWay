@@ -162,6 +162,8 @@
     <Content Include="Assets\POI\450px-p1030219oude_stadhuis_breda.jpg" />
     <Content Include="Assets\POI\akacorleone.jpg" />
     <Content Include="Assets\POI\aron-vellekoop-leon.jpg" />
+    <Content Include="Assets\POI\baronie.jpg" />
+    <Content Include="Assets\POI\brecht.jpg" />
     <Content Include="Assets\POI\Breda_Bibliotheek.jpg" />
     <Content Include="Assets\POI\bruce-tmc.jpg" />
     <Content Include="Assets\POI\cranio.jpg" />
@@ -170,6 +172,7 @@
     <Content Include="Assets\POI\dzia.jpg" />
     <Content Include="Assets\POI\frm.jpg" />
     <Content Include="Assets\POI\Grote_Markt_Breda_DSCF2843.JPG" />
+    <Content Include="Assets\POI\havermarkt.jpg" />
     <Content Include="Assets\POI\hedof-2.jpg" />
     <Content Include="Assets\POI\hedof-3.jpg" />
     <Content Include="Assets\POI\hedof-oase.jpg" />
@@ -181,7 +184,11 @@
     <Content Include="Assets\POI\johan-moorman.jpg" />
     <Content Include="Assets\POI\joren-joshua.jpg" />
     <Content Include="Assets\POI\jukka-hakanen.jpg" />
+    <Content Include="Assets\POI\kasteel.jpg" />
+    <Content Include="Assets\POI\kerk.jpg" />
     <Content Include="Assets\POI\kratje-beeld.jpg" />
+    <Content Include="Assets\POI\liefdeszuster.jpg" />
+    <Content Include="Assets\POI\lighthouse.jpg" />
     <Content Include="Assets\POI\luca-font.jpg" />
     <Content Include="Assets\POI\m-city.jpg" />
     <Content Include="Assets\POI\maikki-rantala.jpg" />
@@ -193,6 +200,8 @@
     <Content Include="Assets\POI\RM10234_Breda_-_Karrestraat_bij_7.jpg" />
     <Content Include="Assets\POI\rutger-termohlen-collin-van-der-sluijs-super-a.jpg" />
     <Content Include="Assets\POI\rutger-termohlen.jpg" />
+    <Content Include="Assets\POI\spanjaardsgat.jpg" />
+    <Content Include="Assets\POI\stadhouderspoort.jpg" />
     <Content Include="Assets\POI\staynice-bloos.jpg" />
     <Content Include="Assets\POI\staynice-kop.jpg" />
     <Content Include="Assets\POI\staynice-lunettunnel.jpg" />
@@ -203,6 +212,8 @@
     <Content Include="Assets\POI\TB_Web_Thumb-150x150.jpg" />
     <Content Include="Assets\POI\teckel-kma.jpg" />
     <Content Include="Assets\POI\thomas-jurgen.jpg" />
+    <Content Include="Assets\POI\vismarkt.jpg" />
+    <Content Include="Assets\POI\vvv.png" />
     <Content Include="Assets\POI\zenk-one-2012.jpg" />
     <Content Include="Assets\POI\zenk-one-godevaert.jpg" />
     <Content Include="Assets\POI\zenk-one-veilingkade.jpg" />
