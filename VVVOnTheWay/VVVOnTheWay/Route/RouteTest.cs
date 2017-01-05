@@ -17,58 +17,83 @@ namespace VVVOnTheWay.Route
         {
             PointsOfInterest = new List<Point>();
             //TODO: Christiaan
-            PointsOfInterest.Add(new PointOfInterest(new[] { "VVV", "VVV" }, new[] { "null", "null" }, false,
-                new[] { "null", "null" }, null,
+            PointsOfInterest.Add(new PointOfInterest(new[] { "VVV", "VVV" },
+                new[] { "Bacon ipsum dolor amet venison meatball pork chop, sirloin shankle sausage ground round tri-tip beef ribs meatloaf capicola pork belly drumstick tail. Turkey short loin tail turducken, sirloin ribeye drumstick bresaola chuck. Pork chop rump swine drumstick pastrami strip steak. Short loin shank flank alcatra short ribs.",
+                "Alcatra flank jowl, pastrami jerky kielbasa tail. Flank pork belly meatloaf pork, fatback kevin tail turducken capicola strip steak leberkas alcatra. Cupim meatloaf swine frankfurter chuck pig tri-tip. Drumstick salami flank turducken sirloin short ribs. Salami brisket kevin frankfurter, rump drumstick capicola sirloin tenderloin bresaola. Short loin tri-tip sirloin jowl brisket drumstick ground round porchetta venison prosciutto." }, 
+                false,
+                new[] { "null", "null" }, "vvv.png",
                 new Geopoint(new BasicGeoposition { Latitude = 51.594119, Longitude = 4.779405 })));
-            PointsOfInterest.Add(new PointOfInterest(new[] { "Liefdezuster", "Liefdezuster" }, new[] { "", "" }, false,
-                new[] { "null", "null" }, null,
+            PointsOfInterest.Add(new PointOfInterest(new[] { "Liefdezuster", "Liefdezuster" }, 
+                new[] { "Hamburger prosciutto burgdoggen spare ribs beef ribs. Capicola boudin landjaeger tri-tip, brisket biltong chicken burgdoggen andouille ham hock porchetta pancetta. Beef ribs tenderloin cupim ham hock. Burgdoggen sirloin jerky, pancetta leberkas ham hock frankfurter. Cupim capicola turkey leberkas. Rump meatball pastrami, meatloaf landjaeger beef alcatra pancetta ham. Kielbasa picanha bresaola drumstick kevin ham shoulder burgdoggen pork belly.",
+                "Strip steak venison turducken turkey tri-tip tenderloin ground round tongue tail chuck burgdoggen picanha spare ribs pancetta. Jowl ham chicken chuck ribeye pork loin frankfurter biltong fatback boudin beef shank capicola. Shankle burgdoggen tenderloin, pancetta shank ground round chuck doner. Brisket salami sausage, fatback ball tip t-bone hamburger burgdoggen. Hamburger tail cupim, short ribs doner flank fatback frankfurter tongue pork chop rump tri-tip shoulder strip steak alcatra. Tri-tip hamburger bacon, filet mignon short loin tenderloin t-bone pastrami ribeye kevin kielbasa pancetta flank. Tri-tip leberkas cow shankle, short loin landjaeger boudin ham t-bone." }, 
+                false,
+                new[] { "null", "null" }, "liefdeszuster.jpg",
                 new Geopoint(new BasicGeoposition { Latitude = 51.5932783, Longitude = 4.7793883 })));
             PointsOfInterest.Add(new PointOfInterest(new[] { "Nassau Baronie Monument", "Nassau Baronie Monument" },
-                new[] { "", "" }, false,
-                new[] { "null", "null" }, null,
+                new[] { "Rump tenderloin tongue shoulder pancetta boudin, ground round jerky pork chop picanha chuck pastrami strip steak ham hock meatball. Meatball tri-tip short ribs meatloaf shoulder corned beef flank jowl beef ham hock fatback pork chop ham bresaola burgdoggen. Short ribs landjaeger pork jerky. Doner tongue short ribs, pork chop capicola drumstick prosciutto ribeye sirloin. Salami shank meatball tail beef ribs hamburger. Frankfurter pork belly prosciutto, ham hock shoulder filet mignon ham landjaeger picanha kielbasa beef hamburger venison bresaola meatloaf.",
+                "Short ribs tenderloin pastrami pork loin occaecat doner tempor jowl. Picanha flank strip steak non beef. Adipisicing bacon ut minim aliqua. Nisi laborum shankle lorem tongue short ribs drumstick deserunt, minim kielbasa ball tip velit kevin enim cupim. Fatback ham cow commodo bresaola ut shoulder reprehenderit fugiat landjaeger meatball chuck rump minim. Flank dolore venison qui veniam, bresaola short ribs quis porchetta." }, 
+                false,
+                new[] { "null", "null" }, "baronie.jpg",
                 new Geopoint(new BasicGeoposition { Latitude = 51.5925000, Longitude = 4.7796950 })));
             PointsOfInterest.Add(
                 new Point(new Geopoint(new BasicGeoposition {Latitude = 51.5925000, Longitude = 4.7793883})));
-            PointsOfInterest.Add(new PointOfInterest(new[] {"The Light House", "The Light House"}, new[] {"", ""}, false,
-                new[] {"null", "null"}, null,
+            PointsOfInterest.Add(new PointOfInterest(new[] {"The Light House", "The Light House"}, 
+                new[] {"Jowl leberkas bresaola meatball, laboris ut cillum nisi boudin excepteur et est. Shankle velit ham hock andouille tri-tip. Consequat dolore pork loin, tenderloin short ribs tongue pork chop cillum swine occaecat pancetta corned beef ad. Labore sunt in sed pariatur jowl hamburger frankfurter bacon pancetta biltong laboris dolore kevin mollit. Do spare ribs leberkas dolor culpa.",
+                "Aliquip minim cupidatat, dolore meatball ball tip pork chop nisi biltong shoulder jerky short loin pariatur. Short ribs landjaeger beef ribs deserunt ribeye eiusmod esse kevin meatloaf swine leberkas shoulder dolore lorem pork loin. Sirloin anim meatball strip steak bacon tongue turducken rump ex consectetur. Short ribs ex magna, salami tenderloin ut lorem drumstick pastrami prosciutto jowl." }, 
+                false,
+                new[] {"null", "null"}, "lighthouse.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5928333, Longitude = 4.7784717})));
             PointsOfInterest.Add(
                 new Point(new Geopoint(new BasicGeoposition {Latitude = 51.5926667, Longitude = 4.7779167})));
             PointsOfInterest.Add(
                 new Point(new Geopoint(new BasicGeoposition {Latitude = 51.5906117, Longitude = 4.7770000})));
-            PointsOfInterest.Add(new PointOfInterest(new[] {"Castle of Breda", "Kasteel van Breda"}, new[] {"", ""},
+            PointsOfInterest.Add(new PointOfInterest(new[] {"Castle of Breda", "Kasteel van Breda"}, 
+                new[] {"Alcatra ut nulla fatback pork belly dolore. Esse incididunt tail biltong fatback aliqua reprehenderit frankfurter pancetta tenderloin brisket et. Commodo non reprehenderit, id ham hock pork loin minim ex flank doner occaecat jerky fatback rump nulla. Burgdoggen eiusmod pork belly cillum, tenderloin salami nisi excepteur sausage ullamco velit ipsum labore. Minim non ut picanha prosciutto elit.",
+                "Ham tail meatball, aliqua brisket burgdoggen strip steak bacon tenderloin aute shoulder biltong. In pariatur capicola biltong filet mignon hamburger meatball jowl elit ham hock cillum duis pork belly ipsum proident. Frankfurter ipsum turkey magna, strip steak et id nulla cow ribeye proident brisket. Pig tongue cow duis, prosciutto incididunt filet mignon deserunt bresaola eiusmod. Exercitation cow leberkas qui commodo, beef consequat pork belly turducken officia sint in voluptate. Prosciutto kevin cupidatat duis." },
                 false,
-                new[] {"null", "null"}, null,
+                new[] {"null", "null"}, "kasteel.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5906117, Longitude = 4.7761667})));
-            PointsOfInterest.Add(new PointOfInterest(new[] {"Regentgate", "Stadshouderspoort"}, new[] {"", ""},
+            PointsOfInterest.Add(new PointOfInterest(new[] {"Regentgate", "Stadshouderspoort"}, 
+                new[] {"Aliqua nulla laboris eiusmod id dolore. Alcatra picanha short loin eu, irure officia quis frankfurter reprehenderit porchetta burgdoggen corned beef elit pastrami pork chop. Tri-tip incididunt fugiat in aute ad alcatra beef ribs turkey qui chuck tongue flank. Qui anim ipsum ea. Deserunt duis occaecat hamburger kielbasa magna landjaeger beef cillum commodo strip steak mollit excepteur doner salami.",
+                "Drumstick sed aliquip eu ex ut. Turducken shankle corned beef incididunt andouille short loin tail exercitation eu et elit aliqua bacon alcatra brisket. Voluptate cupidatat sirloin, short loin ball tip consequat ground round tenderloin anim short ribs ad. Doner non excepteur dolore exercitation, alcatra sunt shankle andouille tongue. Tongue meatloaf officia et, ball tip reprehenderit dolore boudin short ribs est kielbasa filet mignon short loin veniam tenderloin. Sausage velit consectetur aliquip bacon. Tenderloin capicola dolore commodo incididunt, jowl exercitation." },
                 false,
-                new[] {"null", "null"}, null,
+                new[] {"null", "null"}, "stadhouderspoort.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5896950, Longitude = 4.7761383})));
             PointsOfInterest.Add(
                 new Point(new Geopoint(new BasicGeoposition {Latitude = 51.5903333, Longitude = 4.7760000})));
             PointsOfInterest.Add(
                 new Point(new Geopoint(new BasicGeoposition {Latitude = 51.5903883, Longitude = 4.7750000})));
-            PointsOfInterest.Add(new PointOfInterest(new[] {"Huis van Brecht", "Huis van Brecht"}, new[] {"", ""},
+            PointsOfInterest.Add(new PointOfInterest(new[] {"Huis van Brecht", "Huis van Brecht"}, 
+                new[] {"Kielbasa beef ham hock, eu irure turducken ullamco shankle reprehenderit laborum. Laborum chicken ut velit swine burgdoggen prosciutto. Cow pork meatloaf cillum. Eu brisket ad jowl reprehenderit. Landjaeger ullamco turducken, turkey qui nostrud non consectetur. Ut occaecat pastrami frankfurter ullamco sirloin in pig pork non. Tongue consequat tempor shoulder anim ham ut venison.",
+                "Incididunt shoulder landjaeger, enim boudin labore magna occaecat short ribs bresaola filet mignon pork belly corned beef cow kielbasa. Ad turducken beef lorem adipisicing officia irure consectetur porchetta dolore. Adipisicing doner corned beef porchetta bacon filet mignon veniam aute irure sint. Frankfurter ea excepteur ham hock ut beef prosciutto. Anim tenderloin consequat minim kielbasa, picanha adipisicing ut est esse. Aute short loin excepteur sunt pork chop pork loin t-bone ut dolore sint ut nisi ham hock." },
                 false,
-                new[] {"null", "null"}, null,
+                new[] {"null", "null"}, "brecht.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5896950, Longitude = 4.7761383})));
-            PointsOfInterest.Add(new PointOfInterest(new[] {"Spanjaardsgat", "Spanjaardsgat"}, new[] {"", ""},
+            PointsOfInterest.Add(new PointOfInterest(new[] {"Spanjaardsgat", "Spanjaardsgat"}, 
+                new[] {"Quis beef deserunt nisi magna, ut esse. Pastrami bacon salami, qui shank voluptate tempor chicken andouille consequat. Pig in corned beef fatback, turducken t-bone magna aliquip eiusmod shankle sausage drumstick nisi doner pork belly. T-bone culpa laboris, commodo pork belly boudin excepteur short loin brisket salami sint aliquip frankfurter. Biltong reprehenderit sunt ea dolore id et jowl nulla ham ipsum sed dolor commodo sirloin. Tri-tip porchetta incididunt ribeye alcatra lorem do spare ribs kevin picanha hamburger pork loin turducken cow. Ut doner cupim occaecat sausage.",
+                "Bacon ut incididunt chuck proident culpa. Esse et proident tempor corned beef. Commodo occaecat quis, eiusmod jerky aliquip beef in laboris ipsum elit. Pork loin sirloin leberkas elit est. Biltong culpa drumstick boudin picanha beef in hamburger incididunt capicola mollit non. Beef ribs incididunt kevin, reprehenderit eu bacon mollit ham proident flank." },
                 false,
-                new[] {"null", "null"}, null,
+                new[] {"null", "null"}, "spanjaardsgat.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5896950, Longitude = 4.7761383})));
-            PointsOfInterest.Add(new PointOfInterest(new[] {"Vismarkt", "Vismarkt"}, new[] {"", ""},
+            PointsOfInterest.Add(new PointOfInterest(new[] {"Vismarkt", "Vismarkt"}, 
+                new[] {"Shoulder pork chop tongue sed officia ea hamburger. Ut adipisicing officia, bacon esse pariatur pig commodo bresaola flank. Doner tail t-bone in, veniam chuck nostrud rump nulla. Commodo chuck pork loin et shank turkey. Dolore short ribs non doner quis adipisicing filet mignon pork belly hamburger kielbasa aliqua turducken tail dolore. Cupim shank exercitation boudin. Venison ex picanha exercitation cow veniam.",
+                "Pork belly velit ullamco qui beef short loin. Ball tip aliqua nisi, dolore enim pariatur ad duis. Occaecat est incididunt, pig short loin beef fugiat. Pariatur meatloaf culpa enim, tongue jerky excepteur in laborum shankle strip steak bacon cow." },
                 false,
-                new[] {"null", "null"}, null,
+                new[] {"null", "null"}, "vismarkt.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5898333, Longitude = 4.7733333})));
-            PointsOfInterest.Add(new PointOfInterest(new[] {"Havermarkt", "Havermarkt"}, new[] {"", ""},
+            PointsOfInterest.Add(new PointOfInterest(new[] {"Havermarkt", "Havermarkt"}, 
+                new[] {"Bacon ipsum dolor amet tail picanha proident dolore esse aliqua andouille boudin meatball, ad commodo. Prosciutto fugiat proident dolore. Ham dolore quis anim, cupim tail mollit meatball sausage alcatra kevin excepteur non. Ut sint ribeye et ham, commodo nisi pork belly ground round elit. Dolore jowl biltong, tenderloin mollit porchetta short ribs prosciutto shankle.",
+                "Tempor voluptate chicken id lorem. Ball tip aliquip consectetur, id kielbasa beef ribs meatloaf frankfurter ut swine flank eu strip steak. Dolore beef ribs nostrud short ribs occaecat tenderloin. Venison short ribs boudin mollit non aliquip fatback capicola laboris do sed. Excepteur tongue ut deserunt, leberkas sirloin incididunt tempor exercitation bacon. Sed sirloin excepteur, jerky chuck reprehenderit lorem." },
                 false,
-                new[] {"null", "null"}, null,
+                new[] {"null", "null"}, "havermarkt.jpg",
                 new Geopoint(new BasicGeoposition {Latitude = 51.5893617, Longitude = 4.7744450})));
             PointsOfInterest.Add(
                 new Point(new Geopoint(new BasicGeoposition {Latitude = 51.5887783, Longitude = 4.7748883})));
-            PointsOfInterest.Add(new PointOfInterest(new[] {"Grote kerk", "Grote kerk"}, new[] {"", ""},
+            PointsOfInterest.Add(new PointOfInterest(new[] {"Grote kerk", "Grote kerk"}, 
+                new[] {"Dolore turducken rump consequat, tri-tip meatball alcatra est cupidatat. Turducken ad turkey cupidatat, eiusmod bresaola cow ullamco beef ribs ball tip shoulder lorem kielbasa shank. Est prosciutto ullamco tenderloin venison cow, nostrud magna dolor pork chop. Jowl consequat fatback, in esse capicola qui commodo ullamco flank tail in turducken cow.",
+                "Prosciutto pork chuck minim. Fatback deserunt strip steak, meatball mollit tail exercitation duis aliquip pork prosciutto. Boudin aliquip jowl dolore sunt tongue. Qui officia beef ribs esse veniam." },
                 false,
-                new[] { "null", "null" }, null,
+                new[] { "null", "null" }, "kerk.jpg",
                 new Geopoint(new BasicGeoposition { Latitude = 51.5888333, Longitude = 4.7752783 })));
 
 
