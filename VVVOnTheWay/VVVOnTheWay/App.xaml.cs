@@ -116,6 +116,7 @@ namespace VVVOnTheWay
             BingMapsWrapperTestDriver.TestBingMapsWrapper();
             new RouteProgressIOTest();
             new FullRouteIOTest();
+            new Route.RouteTest();
         }
     }
 }

@@ -232,7 +232,8 @@ namespace VVVOnTheWay
                 {
                     Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/guy.png")),
                     Title = Settings.Language == VVVOnTheWay.Language.ENGLISH ? "Your Location" : "Uw locatie",
-                    Location = geoposition.Coordinate.Point
+                    Location = geoposition.Coordinate.Point,
+                    NormalizedAnchorPoint = new Windows.Foundation.Point(0.5, 1.0)
                 };
                 Map.MapElements.Add(_userIcon);
             }
@@ -254,8 +255,9 @@ namespace VVVOnTheWay
                     {
                         Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Point.png")),
                         Title = point.Title[(int) _language],
-                        Location = poi.Location
-                    };
+                        Location = poi.Location,
+                        NormalizedAnchorPoint = new Windows.Foundation.Point(0.5, 1.0)
+                };
                     Map.MapElements.Add(icon);
                     _routeIcons.Add(point, icon);
                 }
