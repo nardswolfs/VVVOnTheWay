@@ -2,8 +2,11 @@
 
 #region
 
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using VVVOnTheWay.Route.Storage;
 using Windows.Devices.Geolocation;
+using Windows.Storage;
 
 #endregion
 
@@ -256,6 +259,7 @@ namespace VVVOnTheWay.Route
                 new[] {"null", "null"}, null,
                 new Geopoint(new BasicGeoposition {Latitude = 51.5895, Longitude = 4.77625})));
             HistoricRoute = new Route(PointsOfInterest);
+            SaveRoute.ToFile(HistoricRoute, "newroute");
         }
 
         public Route HistoricRoute { get; set; }
