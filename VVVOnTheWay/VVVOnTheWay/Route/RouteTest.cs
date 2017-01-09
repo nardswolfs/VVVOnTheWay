@@ -96,7 +96,7 @@ namespace VVVOnTheWay.Route
                 new[] {"Dolore turducken rump consequat, tri-tip meatball alcatra est cupidatat. Turducken ad turkey cupidatat, eiusmod bresaola cow ullamco beef ribs ball tip shoulder lorem kielbasa shank. Est prosciutto ullamco tenderloin venison cow, nostrud magna dolor pork chop. Jowl consequat fatback, in esse capicola qui commodo ullamco flank tail in turducken cow.",
                 "Prosciutto pork chuck minim. Fatback deserunt strip steak, meatball mollit tail exercitation duis aliquip pork prosciutto. Boudin aliquip jowl dolore sunt tongue. Qui officia beef ribs esse veniam." },
                 false,
-                new[] { "null", "null" }, "kerk.jpg",
+                new[] { "GroteKlok.mp3", "GroteKlok.mp3" }, "kerk.jpg",
                 new Geopoint(new BasicGeoposition { Latitude = 51.5888333, Longitude = 4.7752783 })));
 
 
