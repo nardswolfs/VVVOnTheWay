@@ -50,6 +50,8 @@ namespace VVVOnTheWay
         private async void Map_MapElementClick(MapControl sender, MapElementClickEventArgs args)
         {
             var clickedIcon = args.MapElements.FirstOrDefault(x => x is MapIcon) as MapIcon;
+            if (!_routeIcons.ContainsValue(clickedIcon))
+                return;
             var poi = _routeIcons.FirstOrDefault(x => x.Value == clickedIcon).Key;
             var g = new PointDataPage(poi);
             await g.ShowAsync();
