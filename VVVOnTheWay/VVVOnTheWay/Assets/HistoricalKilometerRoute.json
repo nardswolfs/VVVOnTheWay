@@ -256,7 +256,7 @@
 			},
 			"AudioPath": {
 				"$type": "System.String[], mscorlib",
-				"$values": ["null", "null"]
+				"$values": ["GroteKlok.mp3", "GroteKlok.mp3"]
 			},
 			"ImagePath": "kerk.jpg",
 			"jsonPosition": {
